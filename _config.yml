@@ -90,3 +90,10 @@ deploy:
   #repo: git@github.com:zhangdaxiang/zhangdaxiang.gtihub.io.git
   repo: https://github.com/zhangdaxiang/zhangdaxiang.github.io.git
   branch: master
+
+# algolia:
+#   applicationID: U1CX7VE4BO
+#   apiKey: e4fb7902131983e77239abbd2c556a3e
+#   adminApiKey: 8cf45cb6a32070fde25c7f59dfe00523
+#   indexName: blog
+#   chunSize: 5000
