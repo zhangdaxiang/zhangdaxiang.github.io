@@ -97,3 +97,8 @@ deploy:
 #   adminApiKey: 8cf45cb6a32070fde25c7f59dfe00523
 #   indexName: blog
 #   chunSize: 5000
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
