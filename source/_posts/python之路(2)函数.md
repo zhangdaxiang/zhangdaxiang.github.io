@@ -276,3 +276,46 @@ def str2int(s):
 19941105
 ```
 这个其实就和`python`内置的`int()`效果是一样的。
+#### filter
+`python`内置的`filter()`函数可以用于对序列进行过滤。
+和`map()`一样，`filter()`也是作用于一个序列的，对每个序列进行判定，`True`则保留，`False`则剔除。比如说我们要剔除一个`list`里面的奇数，保留偶数：
+```python
+def fun(x):
+	return x%2==0
+>>> list(filter(fun,[1,2,3,4,5,6]))
+[2, 4, 6]
+```
+由于`filter()`函数返回的也是一个`Iterator`，也是一个惰性函数，所以需要使用`list()`来计算所有值，并返回一个列表。
+#### sorted
+`python`内置的`sorted()`函数可以对一个序列进行排序：
+```python
+>>> L=[3,2,5,7,10]
+>>> sorted(L)
+[2, 3, 5, 7, 10]
+>>> L
+[3, 2, 5, 7, 10]
+>>> L.sort()
+>>> L
+[2, 3, 5, 7, 10]
+```
+我们可以看到,`list`的方法`sort()`和`sorted()`是不一样的。
+同时，`sorted`也是一个高阶函数，可以传入一个`key`函数作为参数进行自定义排序。比如说我们要按序列的绝对值进行排序：
+```python
+>>> sorted([-8,1,10,-3,4,6],key=abs)
+[1, -3, 4, 6, -8, 10]
+```
+如果是对字符串进行比较的话，是按照`ASCII`码的顺序进行排序的，比如：
+```python
+>>> sorted(['apple','banana','Ales','zero','Sex'])
+['Ales', 'Sex', 'apple', 'banana', 'zero']
+```
+因为在`ASCII`中，`S`是排在`a`前面的，所以`Sex`排在`apple`前面。如果我们想要忽略字母大写排序的话，可以这样：
+```python
+>>> sorted(['apple','banana','Ales','zero','Sex'],key=str.lower)
+['Ales', 'apple', 'banana', 'Sex', 'zero']
+```
+要倒叙排序的话，可以使用第三个参数`reverse=True`，并不需要对`key`进行改动：
+```python
+>>> sorted(['apple','banana','Ales','zero','Sex'],key=str.lower,reverse=True)
+['zero', 'Sex', 'banana', 'apple', 'Ales']
+```

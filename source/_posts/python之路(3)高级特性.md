@@ -36,8 +36,7 @@ for循环后面还可以加上if判断，这样我们就可以筛选出仅偶数
 >>> [k+'='+v for k,v in people.items()]
 ['city=hangzhou', 'name=张大象', 'age=25']
 ```
-### 生成器和迭代器
-#### 生成器
+### 生成器
 通过列表生成式,我们可以很方便地生成一个列表。但是如果我们要生成一个数量很大的列表，这样会占用很多的空间和资源。如果我们只访问其中的一部分元素，那其他的元素所占的空间都浪费了。python有一个叫生成器(generator)的东西，可是使得我们在循环的时候，边循环边生成，这样就不会浪费很多空间了。
 创建一个生产器常用的有两种方法，第一种方法很简单。就是把列表生成式的`[]`改成`()`，这样就是一个generator了：
 ```python 
@@ -217,7 +216,8 @@ def run(L):
 			L.append(i)
 run(L)
 ```
-#### 迭代器
+### 迭代器
+#### 迭代器原理
 能够直接作用于`for`循环的对象就可以称之为**可迭代对象**(Iterable)，我们可以用`isinstance()`来判定一个对象是否为可迭代对象。
 ```python
 >>> from collections import Iterable
@@ -262,6 +262,44 @@ while True:
 	try:
 		print(next(g))
 	except StopIteration:
+		break
+```
+#### 利用Iterator和filter求质数
+上一篇我们学习了`filter()`筛选函数，现在我们可以用`Iterator`来表示无限序列，所以我们可以来利用`Iterator`和`filter`求所有质数。
+要计算质数我们首先要理解一个算法，叫作埃氏筛法：
+1.先把1给剔除，因为数学界中1既不是质数也不是合数。
+2.将当前队列中最小的数2和2的倍数全部剔除。
+3.将当前队列中最小的数3和3的倍数全部剔除。
+4.将当前队列中最小的数5和5的倍数全部剔除。
+5.不断筛选下去，直到范围内所求的数全部剔除。
+首先我们构建一个从3开始的奇数数列，我们可以用`Iterator`来表示一个无限数列：
+```python 
+def odd():
+	n=1
+	while True:
+		n=n+2
+		yield n
+```
+然后再定义一个筛选函数：
+```python
+def fun(n):
+	return lambda x:x%n!=0
+```
+然后定义一个生成器，不断返回质数：
+def p_number():
+	yield 2
+	num=odd()
+	while True:
+		n=next(num)
+		yield n
+		num=filter(fun(n),num)
+```
+可以看到,因为`p_number()`也是一个无限序列，加一个跳出条件就可以调用：
+​```python
+for i in p_number():
+	if i < 1000:
+		print(i)
+	else:
 		break
 ```
 ### 装饰器
