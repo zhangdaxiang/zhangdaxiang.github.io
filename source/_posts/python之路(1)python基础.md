@@ -398,8 +398,8 @@ for key in names:
 for key,value in names.items():
 	print(key,values)
 ```
-#### 元组
-元组(set)和`list`非常相似，也是一个存储`key`的集合。但是`set`不存储`value`,同时，在`set`中，`key`值也是不可重复的。
+#### 集合
+集合(set)和`dict`非常相似，也是一个存储`key`的集合。但是`set`不存储`value`,同时，在`set`中，`key`值也是不可重复的。
 定义`set`：
 ```python
 >>> names=set(['张大象','飙飙','棒棒糖'])

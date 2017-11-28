@@ -1,6 +1,6 @@
 ---
 title: python之路(5)面向对象
-date: 2017-11-15 16:15:01
+date: 2016-11-15 16:15:01
 tags: python
 categories: python
 ---
@@ -292,4 +292,271 @@ zhangdaxiang
 >>> del people.name #删除类的属性
 >>> people.name
 'zhangdaxiang'
+```
+### 面向对象高级编程
+`python`中的类同时也拥有很多高级特性。
+#### @property装饰器
+之前我们设置私有变量的时候,定义了`set_age`和`get_age`这么两个方法。如果我们希望能够像访问属性一样直接访问这两个方法的话，可以使用`@property`装饰器。
+这个装饰器有`getter`和`setter`两种方法，举个栗子：
+```python
+class People():
+	@property
+	def age(self):
+		return self.__age
+
+	@age.setter
+	def age(self,value):
+		if not isinstance(value,int):
+			raise ValueError('Not int.')
+		if value < 0 or value > 100:
+			raise ValueError('value error.')
+		self.__age = value
+
+teacher=People()
+>>> teacher.age=60 #实际上就是调用set_age(60)
+>>> teacher.age #实际上就是调用get_age
+60
+>>> teacher.age=101 #set_age()中要求age<100,所以报错
+Traceback (most recent call last):
+  File "<pyshell#2>", line 1, in <module>
+    teacher.age=101
+  File "C:\Users\Administrator\Desktop\123.py", line 11, in age
+    raise ValueError('value error.')
+ValueError: value error.
+```
+#### \_\_slots\_\_   
+在定义类的时候,定义一个`__slots__`属性，可以限制类能够绑定的属性。
+与之相对应的是，我们平时定义完一个类之后，是可以随意给类绑定属性和方法的：
+```python
+class People():
+	def __init__(self,name):
+		self.__name = name
+
+>>> teacher=People('zhangdaxiang')
+>>> teacher.age=23
+>>> teacher.age
+23
+```
+要绑定方法的话,需要导入`types`模块中的`MethodType`：
+```python
+from types import MethodType
+teacher=People('zhangdaxiang')
+def eat(self):
+	print( 'is eating')
+teacher.eat=MethodType(eat,teacher)
+```
+需要注意的是，给实例绑定的方法和属性，只有在这个实例可以访问，对于该类的其他实例不起作用。
+加入`__slots__`方法，则只能绑定规定的属性：
+```python
+class People():
+	__slots__ = ('name','age')
+teacher=People()
+>>> teacher.name='zhangdaxiang'
+>>> teacher.age=23
+>>> teacher.city
+Traceback (most recent call last):
+  File "<pyshell#2>", line 1, in <module>
+    teacher.city
+AttributeError: 'People' object has no attribute 'city'
+```
+#### \_\_str\_\_和\_\_repr\_\_
+类里面的`__str__`方法和`__repr__`方法可以使类的实例打印出来更好看，比如说我们平时没有定义这两个属性的类：
+```python
+class People():
+	def __init__(self,name):
+		self.__name = name
+>>> print(People('zhangdaxiang'))
+<__main__.People object at 0x00000000035EB1D0>
+```
+这样直接打印出来的是内存地址。
+如果我们添加了`__str__`方法，就可以定制打印出来的信息：
+```python
+class People():
+	def __init__(self,name):
+		self.__name = name
+	def __str__(self):
+		return 'object People(name,%s)'%self.__name
+>>> print(People('zhangdaxiang')) #这样就打印出来了自己定制的信息
+object People(name,zhangdaxiang) 
+>>> People('zhangdaxiang') #直接输出实例没有变化
+<__main__.People object at 0x00000000035EC208>
+```
+但是我们直接输出实例没有变化，这个时候需要使用`__repr__`这个方法，而且通常因为`__str__`和`__repr__`代码是相同的，所以又便捷的写法：
+```python
+class People():
+	def __init__(self,name):
+		self.__name = name
+	def __str__(self):
+		return 'object People(name,%s)'%self.__name
+	__repr__= __str__
+
+>>> People('zhangdaxiang')
+object People(name,zhangdaxiang) #成了
+```
+#### \_\_iter\_\_
+如果我们想使用`for...in...`来迭代类的实例，可以使用`__iter__`。`__iter__`返回一个可迭代对象，之后`python`的`for`循环会一直调用实例的`__next__`方法,直到`StopIteration`。
+我们举一个最著名的栗子，斐波那契数列：
+```python
+class Fib():
+	def __init__(self,num):
+		self.a,self.b=0,1
+		self.__num = num
+	def __iter__(self):
+		return self
+	def __next__(self):
+		self.a,self.b=self.b,self.a+self.b
+		if self.a>self.__num:
+			raise StopIteration()
+		return self.a
+
+>>> fib = Fib(100)
+>>> for i in fib:
+	print(i)
+
+	
+1
+1
+2
+3
+5
+8
+13
+21
+34
+55
+89
+```
+#### \_\_getitem\_\_
+如果我们想像列表下标一样取出斐波那契数列的元素，可以使用`__getitem()`来实现。
+```python
+class Fib():
+	def __getitem__(self,n):
+		self.a,self.b=0,1
+		for i in range(n):
+			self.a,self.b=self.b,self.a+self.b
+		return self.a
+
+>>> fib=Fib()
+>>> fib[0]
+0
+>>> fib[1]
+1
+>>> fib[2]
+1
+>>> fib[3]
+2
+```
+但是我们输入一个切片，依然不能正常工作，所以如果我们希望可以使用切片的话，应该要先判断参数是一个索引`int`，还是一个切片`slice`。
+```python
+class Fib():
+	def __getitem__(self,n):
+		self.a,self.b=1,1
+		if isinstance(n,int): #n是索引
+			for i in range(n):
+				self.a,self.b=self.b,self.a+self.b
+			return self.a
+		if isinstance(n,slice): #n是切片
+			L=[]
+			start = n.start
+			stop = n.stop
+			if start is None:
+				start = 0 
+			for i in range(stop):
+				if i >= start:
+					L.append(self.a)
+				self.a,self.b=self.b,self.a+self.b
+			return L
+```
+当然现在还没有考虑负数等情况。
+#### \_\_getattr\_\_
+平时我们调用实例不存在的属性，是会报错的。如果我们想要在调用实例不存在的属性的时候，返回我们想要的信息，可以利用`__getattr__`方法，来定义自己想要返回的内容：
+```python
+class People():
+	def __init__(self):
+		self.name = 'zhangdaxiang'
+		self.age = 23
+	def __getattr__(self,str):
+		if str == 'city':
+			return '无家可归！'		
+
+>>> teacher=People()
+>>> teacher.name
+'zhangdaxiang'
+>>> teacher.age
+23
+>>> teacher.city
+'无家可归！'
+```
+也就是调用类不存在的属性的时候，`python`就会调用`__getattr__`方法，`__getattr__`也可以返回一个函数：
+```
+class People():
+	def __init__(self):
+		self.name = 'zhangdaxiang'
+		self.age = 23
+	def __getattr__(self,str):
+		if str == 'city':
+			return lambda x:x+15
+
+>>> teacher=People()
+>>> teacher.city(5)
+20
+```
+要注意的是，只有在没有找到属性的时候，才会调用`__getattr__`方法，而且如果我们调用的不是`__getattr__`方法里面判定过的属性，则会默认返回`None`。如果想让类只响应几个属性，正确的方法是调用不存在的参数抛出`AttributeError`错误：
+```python
+class People():
+	def __init__(self):
+		self.name = 'zhangdaxiang'
+		self.age = 23
+	def __getattr__(self,str):
+		if str == 'city':
+			return '无家可归'
+		raise AttributeError("'People' object has not attribute '%s'"%str)
+
+>>> teacher=People()
+>>> teacher.city
+'无家可归'
+>>> teacher.naee
+Traceback (most recent call last):
+  File "<pyshell#2>", line 1, in <module>
+    teacher.naee
+  File "C:\Users\Administrator\Desktop\123.py", line 8, in __getattr__
+    raise AttributeError("'People' object has not attribute '%s'"%str)
+AttributeError: 'People' object has not attribute 'naee'
+```
+基于这个方法，我们就可以完全动态调用类所有的方法和属性。
+举个栗子，现在很多网站都搞REST API，比如新浪微博、豆瓣啥的，调用API的URL类似：
+>http://api.server/user/friends
+>http://api.server/user/timeline/list
+我们完全可以用`__getattr__`方法来实现，比如说我们想实现`/status/user/timeline/list`这样的输出：
+```python
+class Chain():
+	def __init__(self,path=''):
+		self.__path = path
+	def __getattr__(self,str):
+		return Chain('%s/%s'%(self.__path,str))
+	def __str__(self):
+		return self.__path
+	__repr__=__str__
+
+>>> Chain().status.user.timeline.list
+/status/user/timeline/list
+```
+#### \_\_call\_\_
+如果我们想直接调用实例本身的话，可以使用`__call__`方法：
+```python
+class People():
+	def __init__(self):
+		self.name = 'zhangdaxiang'
+		self.age = 23
+	def __call__(self):
+		print('people\'s name is %s'%self.name)
+
+>>> teacher = People()
+>>> teacher()
+people's name is zhangdaxiang
+```
+这样也就模糊了对象和函数的界限，完全可以把对象看成函数，把函数看成对象，因为这两者之间本来就没啥根本的区别。实际上，能够被调用的对象就是一个`Callable`对象，我们可以用`callble`来判定：
+```python
+>>> callable(People())
+True
 ```

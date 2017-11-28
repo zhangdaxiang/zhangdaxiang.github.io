@@ -286,6 +286,7 @@ def fun(n):
 	return lambda x:x%n!=0
 ```
 然后定义一个生成器，不断返回质数：
+```python
 def p_number():
 	yield 2
 	num=odd()
@@ -295,7 +296,7 @@ def p_number():
 		num=filter(fun(n),num)
 ```
 可以看到,因为`p_number()`也是一个无限序列，加一个跳出条件就可以调用：
-​```python
+```python
 for i in p_number():
 	if i < 1000:
 		print(i)
