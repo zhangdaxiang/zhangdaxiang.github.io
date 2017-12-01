@@ -1,5 +1,5 @@
 ---
-title: python之路(5)面向对象
+title: python之路(5):面向对象
 date: 2016-11-15 16:15:01
 tags: python
 categories: python
@@ -527,7 +527,7 @@ AttributeError: 'People' object has not attribute 'naee'
 举个栗子，现在很多网站都搞REST API，比如新浪微博、豆瓣啥的，调用API的URL类似：
 >http://api.server/user/friends
 >http://api.server/user/timeline/list
-我们完全可以用`__getattr__`方法来实现，比如说我们想实现`/status/user/timeline/list`这样的输出：
+>我们完全可以用`__getattr__`方法来实现，比如说我们想实现`/status/user/timeline/list`这样的输出：
 ```python
 class Chain():
 	def __init__(self,path=''):
