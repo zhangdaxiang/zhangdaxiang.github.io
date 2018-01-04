@@ -3,38 +3,7 @@ title: Hello World
 date: 2016-11-05
 
 ---
-Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).
 
-## Quick Start
-
-### Create a new post
-
-``` bash
-$ hexo new "My New Post"
-```
-
-More info: [Writing](https://hexo.io/docs/writing.html)
-
-### Run server
-
-``` bash
-$ hexo server
-```
-
-More info: [Server](https://hexo.io/docs/server.html)
-
-### Generate static files
-
-``` bash
-$ hexo generate
-```
-
-More info: [Generating](https://hexo.io/docs/generating.html)
-
-### Deploy to remote sites
-
-``` bash
-$ hexo deploy
-```
-
-More info: [Deployment](https://hexo.io/docs/deployment.html)
+“hello，world！”清晨起床，他站在窗口，神采奕奕地向着这个世界打招呼。
+世界脸色铁青地看着这个男人。按照它的运行法则，这个人应该早就死了才对。可是无论它用尽什么办法，第二天朝阳升起来的时候，他都依然活着，慢腾腾地提起裤子，带上眼镜，仿佛对这个世界最大恶意的嘲讽。
+“exciting！”男人嘻嘻笑着，握紧拳头在胸前轻轻一挥，仿佛在玩着一个最有趣的游戏。
