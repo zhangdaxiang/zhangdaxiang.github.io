@@ -280,7 +280,6 @@ True
 ```python
 class People():
 	name = 'zhangdaxiang'
-people = People()
 >>> people = People()
 >>> people.name #实例可以访问类的属性
 'zhangdaxiang'

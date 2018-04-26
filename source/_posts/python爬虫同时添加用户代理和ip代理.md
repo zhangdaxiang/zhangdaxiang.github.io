@@ -49,13 +49,16 @@ Mozilla/5.0 (iPod; U; CPU like Mac OS X; en) AppleWebKit/420.1 (KHTML, like Geck
 
 ```python
 import urllib.request
+url ='https://www.cnblogs.com/AndyChen2015/p/7418280.html'
 headers = ("User-Agent","Mozilla/5.0 (iPod; U; CPU like Mac OS X; en) AppleWebKit/420.1 (KHTML, like Gecko) Version/3.0 Mobile/3A101a Safari/419.3")
 opener = urllib.request.build_opener()
 opener.addheaders = [headers]
 #将opener安装为全局，让urlopen()访问时也添加对应报头
-urllib.requeset.install_opener(opener)
-data1 = opener.open(url).open()
-data2 = urllib.request.urlopen(url).open()
+urllib.request.install_opener(opener)
+data1 = opener.open(url)
+data2 = urllib.request.urlopen(url)
+
+
 ```
 
 #### 添加ip代理
@@ -63,17 +66,13 @@ data2 = urllib.request.urlopen(url).open()
 ```python
 import urllib.request
 ip = "192.168.1.1"
-proxy urllib.request.ProxyHandler({"http":ip})
+proxy = urllib.request.ProxyHandler({"http":ip})
 opener = urllib.request.build_opener(proxy,urllib.request.HTTPHandler)
 #将opener安装为全局
 urllib.request.install_opener(opener)
 ```
 
 ### 完整代码(两者同时添加)
-```python
-import urllib
-```
-
 ```python
 #同时使用ip代理以及用户代理
 import urllib.request

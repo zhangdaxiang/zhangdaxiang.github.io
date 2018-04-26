@@ -92,7 +92,10 @@ tongchengsheet.remove({'name':name})
 ```python
 tongchengsheet.update({'name':name},{'$set':{'age':age,'city':city}})
 ```
-即为把`name`条件为“name”的行，`age`和`city`字段改成设定的值。
+即为把`name`条件为“name”的行，`age`和`city`字段改成设定的值。这样只会修改发现的第一条数据，如果想修改所有的文档，需要把`multi`参数改成`true`。
+```python
+tongchengsheet.update({'name':name},{'set':{'age':age,'city':city}},{'multi':true})
+```
 #### 查找数据
 ```python
 #find_one()查询一条数据，不带参数则返回第一条，带参数则按条件查找
