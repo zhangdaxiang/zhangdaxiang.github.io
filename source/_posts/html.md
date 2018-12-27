@@ -184,7 +184,7 @@ input 元素
 	<input type="submit" value="Submit">
 </form>
 ```
-##### <select>下拉标签属性
+##### select下拉标签属性
 ```html
 <form>
 	<select name="cars">

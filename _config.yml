@@ -87,8 +87,8 @@ avatar: /uploads/touxiang.png
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  #repo: git@github.com:zhangdaxiang/zhangdaxiang.gtihub.io.git
-  repo: https://github.com/zhangdaxiang/zhangdaxiang.github.io.git
+  repo: git@github.com:zhangdaxiang/zhangdaxiang.gtihub.io.git
+  #repo: https://github.com/zhangdaxiang/zhangdaxiang.github.io.git
   branch: master
 
 # algolia:

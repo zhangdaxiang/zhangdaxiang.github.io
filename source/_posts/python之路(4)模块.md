@@ -2,7 +2,7 @@
 title: python之路(4):模块
 date: 2016-11-15 10:37:48
 tags: [python,module]
-categories:python
+categories: python
 ---
 在`python`中，一个`.py`文件就是一个模块，我们可以将模块导入，直接使用里面已经写好的功能，所以`python`的拓展性是非常好的。但是如果我们的`.py`文件和`python`原有的模块名称重复了，就会出现问题。要解决这种情况，有一种方法是引入包。比如说我们的`zhangdaxiang.py`模块以及`bangbang.py`模块与系统原有模块重名了。我们可以选择一个顶层包名`mypy`,文件结构就成了这样：
 ```
