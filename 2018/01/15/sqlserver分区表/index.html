@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-da.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-da.png?v=5.1.3">
+
+
+
+
+
+
+  <meta name="keywords" content="sqlserver,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="大象无形" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="分区表的定义一般情况下，我们建立一个数据库的表，表里面的数据都会放在同一个文件里面。但是如果是分区表的话，表数据会根据我们自定义的规则给存放到不同的文件中。这样其实就相当于将一个大的数据文件拆分为多个小文件，这样文件的大小随着拆分而减小，可以得到硬件系统方面的假期。而且可以将这些小文件放在不同磁盘下的多个CPU来进行处理，大大提升数据的性能。概括一下，分区表的优势主要体现在：提供性能：这个是大多人">
+<meta name="keywords" content="sqlserver">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sqlserver分区表">
+<meta property="og:url" content="http://yoursite.com/2018/01/15/sqlserver分区表/index.html">
+<meta property="og:site_name" content="大象无形">
+<meta property="og:description" content="分区表的定义一般情况下，我们建立一个数据库的表，表里面的数据都会放在同一个文件里面。但是如果是分区表的话，表数据会根据我们自定义的规则给存放到不同的文件中。这样其实就相当于将一个大的数据文件拆分为多个小文件，这样文件的大小随着拆分而减小，可以得到硬件系统方面的假期。而且可以将这些小文件放在不同磁盘下的多个CPU来进行处理，大大提升数据的性能。概括一下，分区表的优势主要体现在：提供性能：这个是大多人">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/img/sqlserver_分区表/sqlserver_fenqu6.jpg">
+<meta property="og:image" content="http://yoursite.com/img/sqlserver_分区表/sqlserver_fenqu1.jpg">
+<meta property="og:image" content="http://yoursite.com/img/sqlserver_分区表/sqlserver_fenqu2.jpg">
+<meta property="og:image" content="http://yoursite.com/img/sqlserver_分区表/sqlserver_fenqu3.jpg">
+<meta property="og:image" content="http://yoursite.com/img/sqlserver_分区表/sqlserver_fenqu4.jpg">
+<meta property="og:image" content="http://yoursite.com/img/sqlserver_分区表/sqlserver_fenqu5.jpg">
+<meta property="og:image" content="http://yoursite.com/img/sqlserver_分区表/sqlserver_fenqu7.jpg">
+<meta property="og:image" content="http://yoursite.com/img/sqlserver_分区表/sqlserver_fenqu8.jpg">
+<meta property="og:image" content="http://yoursite.com/img/sqlserver_分区表/sqlserver_fenqu9.jpg">
+<meta property="og:image" content="http://yoursite.com/img/sqlserver_分区表/sqlserver_fenqu10.jpg">
+<meta property="og:image" content="http://yoursite.com/img/sqlserver_分区表/sqlserver_fenqu11.jpg">
+<meta property="og:image" content="http://yoursite.com/img/sqlserver_分区表/sqlserver_fenqu12.jpg">
+<meta property="og:updated_time" content="2018-12-27T02:46:29.803Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sqlserver分区表">
+<meta name="twitter:description" content="分区表的定义一般情况下，我们建立一个数据库的表，表里面的数据都会放在同一个文件里面。但是如果是分区表的话，表数据会根据我们自定义的规则给存放到不同的文件中。这样其实就相当于将一个大的数据文件拆分为多个小文件，这样文件的大小随着拆分而减小，可以得到硬件系统方面的假期。而且可以将这些小文件放在不同磁盘下的多个CPU来进行处理，大大提升数据的性能。概括一下，分区表的优势主要体现在：提供性能：这个是大多人">
+<meta name="twitter:image" content="http://yoursite.com/img/sqlserver_分区表/sqlserver_fenqu6.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"right","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"输入关键词","hits_empty":"无法与${query}匹配","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/15/sqlserver分区表/">
+
+
+
+
+
+  <title>sqlserver分区表 | 大象无形</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">大象无形</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            时间轴
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/15/sqlserver分区表/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="张大象">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/touxiang.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大象无形">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">sqlserver分区表</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-15T14:36:24+08:00">
+                2018-01-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="分区表的定义"><a href="#分区表的定义" class="headerlink" title="分区表的定义"></a>分区表的定义</h3><p>一般情况下，我们建立一个数据库的表，表里面的数据都会放在同一个文件里面。但是如果是分区表的话，表数据会根据我们自定义的规则给存放到不同的文件中。这样其实就相当于将一个大的数据文件拆分为多个小文件，这样文件的大小随着拆分而减小，可以得到硬件系统方面的假期。而且可以将这些小文件放在不同磁盘下的多个CPU来进行处理，大大提升数据的性能。<br>概括一下，分区表的优势主要体现在：<ul><li>提供性能：这个是大多人数分区的目的，把一个表分部到不同的硬盘或其他存储介质中，会大大提升查询速度。</li><li>提高稳定性：当一个分区出了问题，不会影响其他分区，仅仅是当前坏的分区不可用。</li><li>便于管理：把一个大表分成若干个小表，则备份和恢复的时候不再需要备份整个表，可以单独备份分区。</li><li>存档：将一些不太常用的数据，单独存放。如：将1年前的数据记录分到一个专门的存档服务器存放。</li></ul>但是这样仅限于大数据量的数据表，对于小数据量的表。这样还会产生不必要的开销，得不偿失。</p>
+<h3 id="创建文件组"><a href="#创建文件组" class="headerlink" title="创建文件组"></a>创建文件组</h3><p>分区是要把一个表数据拆分为若干子集合，也就是把把一个数据文件拆分到多个数据文件中，然而这些文件的存放可以依托一个文件组或者多个文件组，由于多个文件组可以提高数据库的访问并发量，还可以把不同的分区配置到不同的磁盘中提高效率，所以创建时建议分区跟文件组个数相同。</p>
+<h4 id="创建文件组-1"><a href="#创建文件组-1" class="headerlink" title="创建文件组"></a>创建文件组</h4><p>创建文件组的语法如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">DATABASE</span> &lt;数据库名&gt; <span class="keyword">ADD</span> filegroup &lt;文件组名&gt;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">---创建数据库文件组</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">database</span> testDB <span class="keyword">add</span> filegroup ByBirGroup1</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">database</span> testDB <span class="keyword">add</span> filegroup ByBirGroup2</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">database</span> testDB <span class="keyword">add</span> filegroup ByBirGroup3</span><br></pre></td></tr></table></figure>
+<h4 id="创建数据文件到文件组里面"><a href="#创建数据文件到文件组里面" class="headerlink" title="创建数据文件到文件组里面"></a>创建数据文件到文件组里面</h4><p>创建数据文件到文件组的语法如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">DATABASE</span> &lt;数据库名称&gt; <span class="keyword">ADD</span> <span class="keyword">FILE</span> &lt;数据标识&gt; <span class="keyword">TO</span> FILEGROUP &lt;文件组名称&gt;</span><br><span class="line"><span class="comment">---&lt;数据标识&gt; （name:文件名，fliename:物理路径文件名，size:文件初始大小kb/mb/gb/tb，filegrowth:文件自动增量kb/mb/gb/tb/%,maxsize:文件可以增加到的最大大小kb/mb/gb/tb/unlimited）</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">database</span> testDB <span class="keyword">add</span> <span class="keyword">file</span> </span><br><span class="line">(<span class="keyword">name</span>=N<span class="string">'ByBirGroup1'</span>,filename=N<span class="string">'D:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\testDB1.mdf'</span>,<span class="keyword">size</span>=<span class="number">5</span>Mb,filegrowth=<span class="number">1</span>mb)</span><br><span class="line"><span class="keyword">to</span> filegroup ByBirGroup1</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">database</span> testDB <span class="keyword">add</span> <span class="keyword">file</span> </span><br><span class="line">(<span class="keyword">name</span>=N<span class="string">'ByBirGroup2'</span>,filename=N<span class="string">'D:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\testDB2.mdf'</span>,<span class="keyword">size</span>=<span class="number">5</span>Mb,filegrowth=<span class="number">1</span>mb)</span><br><span class="line"><span class="keyword">to</span> filegroup ByBirGroup2</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">database</span> testDB <span class="keyword">add</span> <span class="keyword">file</span> </span><br><span class="line">(<span class="keyword">name</span>=N<span class="string">'ByBirGroup3'</span>,filename=N<span class="string">'D:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\testDB3.mdf'</span>,<span class="keyword">size</span>=<span class="number">5</span>Mb,filegrowth=<span class="number">1</span>mb)</span><br><span class="line"><span class="keyword">to</span> filegroup ByBirGroup3</span><br></pre></td></tr></table></figure>
+<p>查询当前的所有文件组<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>,type_desc,physical_name,state_desc,<span class="keyword">size</span>,growth</span><br><span class="line"><span class="keyword">FROM</span> sys.database_files</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，成了。<br><img src="/img/sqlserver_分区表/sqlserver_fenqu6.jpg" alt="fenqu6" width="800" height="800"></p>
+<h3 id="分区表的操作步骤"><a href="#分区表的操作步骤" class="headerlink" title="分区表的操作步骤"></a>分区表的操作步骤</h3><p>分区表分为三部分：分区函数，分区框架和分区表。他们之间的关系是：<strong>分区表依赖于分区构架，分区构架又依赖分区函数。</strong>所以定义分区表的顺序是定义分区函数-&gt;定义分区构架-&gt;定义分区表。我们实际操作的时候，需要有一张需要分区的表：<br><img src="/img/sqlserver_分区表/sqlserver_fenqu1.jpg" alt="fenqu1" width="400" hight="400"></p>
+<h4 id="定义分区函数"><a href="#定义分区函数" class="headerlink" title="定义分区函数"></a>定义分区函数</h4><p>分区函数的作用是判断一行数据属于哪一个分区，通过在分区函数中设定边界值来使得根据行中特殊列的值来确定分区，比如上面的分区表：<br>假如选择的是<code>id</code>列，那就是<code>int</code>类型，那么分区可以指定为1-100w是一个分区，100-200w是一个分区。<br>假如选择的是<code>birthday</code>列，那就是<code>datetime</code>类型可以指定为<code>2014-01-01</code>至<code>2017-01-01</code>一个分区，<code>2017-01-01</code>以后一个分区。放一张<code>CareySon</code>大佬的图，方便理解。<br><img src="/img/sqlserver_分区表/sqlserver_fenqu2.jpg" alt="" fenqu2="" width="400" hight="600"><br>定义分区函数的语法如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">PARTITION</span> <span class="keyword">FUNCTION</span> partition_function_name ( input_parameter_type )</span><br><span class="line"><span class="keyword">AS</span> <span class="keyword">RANGE</span> [ <span class="keyword">LEFT</span> | <span class="keyword">RIGHT</span> ] </span><br><span class="line"><span class="keyword">FOR</span> <span class="keyword">VALUES</span> ( [ boundary_value [ ,...n ] ] ) </span><br><span class="line">[ ; ]</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，定义函数的语法中，并没有涉及到具体的表，这是因为分区函数并不和具体的表相关联。其中的<code>Range left</code>和<code>right</code>决定这个边界值应该归属于左边还是右边。<br><img src="/img/sqlserver_分区表/sqlserver_fenqu3.jpg" alt="fenqu3" width="400" height="600"><br>创建分区函数:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">---创建分区函数</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">PARTITION</span> <span class="keyword">FUNCTION</span> Fun_test_zyz_birthday(DATETIME)</span><br><span class="line"><span class="keyword">AS</span> <span class="keyword">RANGE</span> <span class="keyword">LEFT</span> </span><br><span class="line"><span class="keyword">FOR</span> <span class="keyword">VALUES</span>(<span class="string">'2004-01-01'</span>,<span class="string">'2007-01-01'</span>)</span><br><span class="line"><span class="comment">--查看分区函数是否创建成功</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> sys.partition_functions</span><br></pre></td></tr></table></figure></p>
+<p>查询结果如图所示：<br><img src="/img/sqlserver_分区表/sqlserver_fenqu4.jpg" alt="fenqu4" width="1000" height="1000"></p>
+<h4 id="定义分区框架"><a href="#定义分区框架" class="headerlink" title="定义分区框架"></a>定义分区框架</h4><p>分区函数决定了数据该分到哪个分区，而分配每个分区属于哪个文件组，则需要依赖分区框架。<br>定义分区框架的语法如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">PARTITION</span> SCHEME partition_scheme_name</span><br><span class="line"><span class="keyword">AS</span> <span class="keyword">PARTITION</span> partition_function_name</span><br><span class="line">[ ALL ] <span class="keyword">TO</span> ( &#123; file_group_name | [ PRIMARY ] &#125; [ ,...n ] )</span><br><span class="line">[ ; ]</span><br></pre></td></tr></table></figure></p>
+<p><img src="/img/sqlserver_分区表/sqlserver_fenqu5.jpg" alt="fenqu5" width="400" height="600"><br>根据之前的分区函数和文件组，可以得到：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--基于之前的分区函数创建分区构架schema</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">PARTITION</span> SCHEME SchemaForParirion</span><br><span class="line"><span class="keyword">AS</span> <span class="keyword">PARTITION</span> Fun_test_zyz_birthday    <span class="comment">--这个是之前创建的分区函数</span></span><br><span class="line"><span class="keyword">TO</span>(ByBirGroup1,ByBirGroup2,ByBirGroup3)   <span class="comment">--FileGroup1是自己添加的文件组，因为有两个分界值，3个分区，所以要指定3个文件组，也可以使用ALL所谓的分区指向一个文件组</span></span><br><span class="line"><span class="comment">--查看已创建的分区构架</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> sys.partition_schemes</span><br></pre></td></tr></table></figure></p>
+<h3 id="定义分区表"><a href="#定义分区表" class="headerlink" title="定义分区表"></a>定义分区表</h3><p>需要知道一点的是，一个表在创建的时候就要决定是否是分区表了，虽然大多数情况下，我们是因为一个表的数据过大才决定分区的。<br>所以，在创建表的时候确立为分区表<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> [dbo].[test_zyz](</span><br><span class="line">	[<span class="keyword">id</span>] [<span class="built_in">INT</span>]  <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">	[<span class="keyword">name</span>] [<span class="built_in">VARCHAR</span>](<span class="number">50</span>) <span class="literal">NULL</span>,</span><br><span class="line">	[age] [<span class="built_in">INT</span>] <span class="literal">NULL</span>,</span><br><span class="line">	[birthday] [DATETIME]  PRIMARY <span class="keyword">KEY</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>)</span><br><span class="line"><span class="keyword">ON</span> SchemaForParirion([birthday]) <span class="comment">--SchemaForPartition是刚刚定义的分区架构，括号内为指定的分区列</span></span><br></pre></td></tr></table></figure></p>
+<p>插入测试数据<br><img src="/img/sqlserver_分区表/sqlserver_fenqu7.jpg" alt="fenqu7" width="400" height="400"><br>可以通过下列语句来查看分区状况：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">convert</span>(<span class="built_in">varchar</span>(<span class="number">50</span>), ps.name) <span class="keyword">as</span> partition_scheme,</span><br><span class="line">p.partition_number, </span><br><span class="line"><span class="keyword">convert</span>(<span class="built_in">varchar</span>(<span class="number">20</span>), ds2.name) <span class="keyword">as</span> filegroup, </span><br><span class="line"><span class="keyword">convert</span>(<span class="built_in">varchar</span>(<span class="number">20</span>), <span class="keyword">isnull</span>(v.value, <span class="string">''</span>), <span class="number">120</span>) <span class="keyword">as</span> range_boundary, </span><br><span class="line"><span class="keyword">str</span>(p.rows, <span class="number">9</span>) <span class="keyword">as</span> <span class="keyword">rows</span></span><br><span class="line"><span class="keyword">from</span> sys.indexes i </span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> sys.partition_schemes ps <span class="keyword">on</span> i.data_space_id = ps.data_space_id </span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> sys.destination_data_spaces dds</span><br><span class="line"><span class="keyword">on</span> ps.data_space_id = dds.partition_scheme_id </span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> sys.data_spaces ds2 <span class="keyword">on</span> dds.data_space_id = ds2.data_space_id </span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> sys.partitions p <span class="keyword">on</span> dds.destination_id = p.partition_number</span><br><span class="line"><span class="keyword">and</span> p.object_id = i.object_id <span class="keyword">and</span> p.index_id = i.index_id </span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> sys.partition_functions pf <span class="keyword">on</span> ps.function_id = pf.function_id </span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> sys.Partition_Range_values v <span class="keyword">on</span> pf.function_id = v.function_id</span><br><span class="line"><span class="keyword">and</span> v.boundary_id = p.partition_number - pf.boundary_value_on_right </span><br><span class="line"><span class="keyword">WHERE</span> i.object_id = object_id(<span class="string">'test_zyz'</span>)    <span class="comment">--此处是表名</span></span><br><span class="line"><span class="keyword">and</span> i.index_id <span class="keyword">in</span> (<span class="number">0</span>, <span class="number">1</span>) </span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> p.partition_number</span><br></pre></td></tr></table></figure></p>
+<p>可以看到各分区的具体数量<br><img src="/img/sqlserver_分区表/sqlserver_fenqu8.jpg" alt="fenqu8" width="600" height="600"><br>查询某个分区的语法是：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> test_zyz</span><br><span class="line"><span class="keyword">WHERE</span> $partition.Fun_test_zyz_birthday(birthday)=<span class="number">2</span> <span class="comment">---$partition.分区函数(分区列)</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="分区表的分割与合并"><a href="#分区表的分割与合并" class="headerlink" title="分区表的分割与合并"></a>分区表的分割与合并</h3><h3 id="分区表的分割"><a href="#分区表的分割" class="headerlink" title="分区表的分割"></a>分区表的分割</h3><p>分区表的分割就相当于新建一个分区，将原有的分区内需要被分割的内容插入到新建的分区中，然后删除这部分内容。<br>新加入一个分割点：<code>2009-01-01</code>。如图所示：<br><img src="/img/sqlserver_分区表/sqlserver_fenqu9.jpg" alt="fenqu9" width="400" height="600"><br>对于上图的操作，分割时候，被分割的分区3内的内容复制到分区4，然后删除分区3中对于的部分。<strong>但是这种操作非常消耗IO，并且会在分割的过程中锁定分区3的内容，而且这个操作所产生的日志是被转移数据的4倍。</strong>所以最后在建表的时候就考虑到以后的分割点。<br>分区分割分为两个步骤：<ul><li>首先要告诉SQL Server新建立的分区放到哪个文件组。</li><li>建立新的分割点。</li></ul>现在增加一条测试数据：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> test_zyz(<span class="keyword">name</span>,age,birthday)</span><br><span class="line"><span class="keyword">VALUES</span>(<span class="string">'xiaoming5'</span>,<span class="number">20</span>,<span class="string">'2011-01-01 00:00:00.000'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>执行长查询，得到：<br><img src="/img/sqlserver_分区表/sqlserver_fenqu10.jpg" alt="fenqu10"><br>接下来可以执行分割操作：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--分割出来的分区数据存在在哪个文件组</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">PARTITION</span> SCHEME SchemaForParirion <span class="keyword">NEXT</span> USED <span class="string">'ByBirGroup2'</span></span><br><span class="line"><span class="comment">--添加分割点</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">PARTITION</span> <span class="keyword">FUNCTION</span> Fun_test_zyz_birthday()</span><br><span class="line"><span class="keyword">SPLIT</span> <span class="keyword">RANGE</span>(<span class="string">'2009-01-01'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>再次查询可以得到：<br><img src="/img/sqlserver_分区表/sqlserver_fenqu11.jpg" alt="fenqu11"></p>
+<h4 id="分区表的合并"><a href="#分区表的合并" class="headerlink" title="分区表的合并"></a>分区表的合并</h4><p>分区表的合并可以看做是分割的逆操作，合并时必须提供分割点，且分割点存在，不然会报错：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--提供分割点，合并分区</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">PARTITION</span> <span class="keyword">FUNCTION</span> Fun_test_zyz_birthday()</span><br><span class="line"><span class="keyword">MERGE</span> <span class="keyword">RANGE</span>(<span class="string">'2009-01-01'</span>)</span><br></pre></td></tr></table></figure></p>
+<h3 id="分区表数据迁移"><a href="#分区表数据迁移" class="headerlink" title="分区表数据迁移"></a>分区表数据迁移</h3><h4 id="分区表一个分区的数据迁移到普通表"><a href="#分区表一个分区的数据迁移到普通表" class="headerlink" title="分区表一个分区的数据迁移到普通表"></a>分区表一个分区的数据迁移到普通表</h4><p>从分区到普通表，需要满足以下条件：<ul><li>普通表必须建立在分区表切换出的分区所在的文件组上。</li><li>普通表的表结构和分区表一致。</li><li>普通表上的索引要和分区表一致，包括聚集索引和非聚集索引。</li><li>普通表必须是空表。</li></ul><br>首先，创建和<code>test_zyz</code>结构相同的普通表：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> [dbo].[test_zyz2](</span><br><span class="line">	[<span class="keyword">id</span>] [<span class="built_in">INT</span>] <span class="keyword">IDENTITY</span>(<span class="number">1</span>,<span class="number">1</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">	[<span class="keyword">name</span>] [<span class="built_in">VARCHAR</span>](<span class="number">50</span>) <span class="literal">NULL</span>,</span><br><span class="line">	[age] [<span class="built_in">INT</span>] <span class="literal">NULL</span>,</span><br><span class="line">	[birthday] [DATETIME] <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line"> <span class="keyword">CONSTRAINT</span> [PK_test_zyz2] PRIMARY <span class="keyword">KEY</span> NONCLUSTERED </span><br><span class="line">(</span><br><span class="line">	[birthday] <span class="keyword">ASC</span></span><br><span class="line">)<span class="keyword">WITH</span> (PAD_INDEX = <span class="keyword">OFF</span>, STATISTICS_NORECOMPUTE = <span class="keyword">OFF</span>, IGNORE_DUP_KEY = <span class="keyword">OFF</span>, ALLOW_ROW_LOCKS = <span class="keyword">ON</span>, ALLOW_PAGE_LOCKS = <span class="keyword">ON</span>) <span class="keyword">ON</span> [ByBirGroup2]</span><br><span class="line">) <span class="keyword">ON</span> [ByBirGroup2] <span class="comment">---表格建在分区2上，这样我们就能迁移分区2的数据</span></span><br></pre></td></tr></table></figure></p>
+<p>然后从分区表中复制数据到普通表：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--将test_zyz分区表中的第2分区数据复制到普通表中</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> testdb..test_zyz <span class="keyword">switch</span> <span class="keyword">partition</span> <span class="number">2</span> <span class="keyword">to</span> testdb..test_zyz2</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，分区2的数据已经没有了,迁移到了<code>test_zyz2</code>表中<br><img src="/img/sqlserver_分区表/sqlserver_fenqu12.jpg" alt="fenqu12"><br>但是要注意的是，从普通表<code>test_zyz2</code>中还原数据到<code>test_zyz</code>这个分区表分区2的时候，还要新增另外一个条件：普通表必须加上和分区数据范围一致的 check 约束条件。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> testdb..test_zyz2 <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> CK_SalesOrders_Birthday</span><br><span class="line"><span class="keyword">CHECK</span>(birthday&gt;<span class="string">'2004-01-01'</span> <span class="keyword">AND</span> birthday&lt;=<span class="string">'2007-01-01'</span>) <span class="comment">---之前分区函数是left，所以应该是&lt;='2007-01-01'</span></span><br></pre></td></tr></table></figure></p>
+<p>成功建立<code>check</code>约束条件以后，就可以还原数据了：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--将普通表中的数据复制到test_zyz分区表中的第2分区</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> testdb..test_zyz2 <span class="keyword">switch</span> <span class="keyword">to</span> testdb..test_zyz <span class="keyword">partition</span> <span class="number">2</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>分区表分区切换并没有真正去移动数据,而是<code>SQL Server</code>在系统底层改变了表的元数据。因此分区表分区切换是高效、快速、灵活的。利用分区表的分区切换功能，我们可以快速加载数据到分区表、卸载分区数据到普通表，然后<code>TRUNCATE</code>普通表，以实现快速删除分区表数据，也可以快速迁移分区到历史表。<br>本文学习自<a href="http://www.cnblogs.com/CareySon/archive/2011/12/30/2307766.html" target="_blank" rel="noopener">理解SQL SERVER中的分区表</a>，感谢宋沄剑大大。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>张大象测试着玩的。</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="张大象 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/sqlserver/" <i="" class="fa fa-tag"> sqlserver</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/14/jupyter-notebook和charts实现数据可视化/" rel="next" title="jupyter notebook和charts实现数据可视化">
+                <i class="fa fa-chevron-left"></i> jupyter notebook和charts实现数据可视化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/02/Centos-grub修改密码/" rel="prev" title="Centos grub修改密码">
+                Centos grub修改密码 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="uyan_frame"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/touxiang.png" alt="张大象">
+            
+              <p class="site-author-name" itemprop="name">张大象</p>
+              <p class="site-description motion-element" itemprop="description">大象无形，大音希声。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#分区表的定义"><span class="nav-number">1.</span> <span class="nav-text">分区表的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建文件组"><span class="nav-number">2.</span> <span class="nav-text">创建文件组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建文件组-1"><span class="nav-number">2.1.</span> <span class="nav-text">创建文件组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建数据文件到文件组里面"><span class="nav-number">2.2.</span> <span class="nav-text">创建数据文件到文件组里面</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分区表的操作步骤"><span class="nav-number">3.</span> <span class="nav-text">分区表的操作步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义分区函数"><span class="nav-number">3.1.</span> <span class="nav-text">定义分区函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定义分区框架"><span class="nav-number">3.2.</span> <span class="nav-text">定义分区框架</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义分区表"><span class="nav-number">4.</span> <span class="nav-text">定义分区表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分区表的分割与合并"><span class="nav-number">5.</span> <span class="nav-text">分区表的分割与合并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分区表的分割"><span class="nav-number">6.</span> <span class="nav-text">分区表的分割</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#分区表的合并"><span class="nav-number">6.1.</span> <span class="nav-text">分区表的合并</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分区表数据迁移"><span class="nav-number">7.</span> <span class="nav-text">分区表数据迁移</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#分区表一个分区的数据迁移到普通表"><span class="nav-number">7.1.</span> <span class="nav-text">分区表一个分区的数据迁移到普通表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">8.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+
+  </span>
+  <span class="author" itemprop="copyrightHolder">❤ Powered By-张大象</span>
+
+  
+</div>
+
+
+  <div class="powered-by"> 个人专属</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">博客 &mdash;  张大象</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2147235"></script>
+      <!-- UY END -->
+    
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>

@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-da.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-da.png?v=5.1.3">
+
+
+
+
+
+
+  <meta name="keywords" content="python,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="大象无形" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="数据类型和变量python的数据类型可以分为以下几种： 整数python中的整数和数学中的整数定义并没有什么不同，但是由于计算机使用的是二进制，所以用0x为前缀的十六进制来表示更为方便，比如0xa5b4c4d2等 浮点数浮点数就是我们通常意义上的小数,对于很大的浮点数,我们需要用科学计数法来表示,把其中的10用e来代替。比如说1.6x10^9就表示为1.6e9。 字符串字符串就是用&amp;#39;和&amp;q">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python之路(1):python基础">
+<meta property="og:url" content="http://yoursite.com/2016/11/06/python之路(1)python基础/index.html">
+<meta property="og:site_name" content="大象无形">
+<meta property="og:description" content="数据类型和变量python的数据类型可以分为以下几种： 整数python中的整数和数学中的整数定义并没有什么不同，但是由于计算机使用的是二进制，所以用0x为前缀的十六进制来表示更为方便，比如0xa5b4c4d2等 浮点数浮点数就是我们通常意义上的小数,对于很大的浮点数,我们需要用科学计数法来表示,把其中的10用e来代替。比如说1.6x10^9就表示为1.6e9。 字符串字符串就是用&amp;#39;和&amp;q">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-27T02:46:29.800Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python之路(1):python基础">
+<meta name="twitter:description" content="数据类型和变量python的数据类型可以分为以下几种： 整数python中的整数和数学中的整数定义并没有什么不同，但是由于计算机使用的是二进制，所以用0x为前缀的十六进制来表示更为方便，比如0xa5b4c4d2等 浮点数浮点数就是我们通常意义上的小数,对于很大的浮点数,我们需要用科学计数法来表示,把其中的10用e来代替。比如说1.6x10^9就表示为1.6e9。 字符串字符串就是用&amp;#39;和&amp;q">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"right","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"输入关键词","hits_empty":"无法与${query}匹配","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/11/06/python之路(1)python基础/">
+
+
+
+
+
+  <title>python之路(1):python基础 | 大象无形</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">大象无形</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            时间轴
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/06/python之路(1)python基础/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="张大象">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/touxiang.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大象无形">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python之路(1):python基础</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-06T11:57:03+08:00">
+                2016-11-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="数据类型和变量"><a href="#数据类型和变量" class="headerlink" title="数据类型和变量"></a>数据类型和变量</h3><p>python的数据类型可以分为以下几种：</p>
+<h4 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h4><p><code>python</code>中的整数和数学中的整数定义并没有什么不同，但是由于计算机使用的是二进制，所以用<code>0x</code>为前缀的十六进制来表示更为方便，比如<code>0xa5b4c4d2</code>等</p>
+<h4 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h4><p>浮点数就是我们通常意义上的小数,对于很大的浮点数,我们需要用科学计数法来表示,把其中的10用<code>e</code>来代替。比如说<code>1.6x10^9</code>就表示为<code>1.6e9</code>。</p>
+<h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><p>字符串就是用<code>&#39;</code>和<code>&quot;</code>双引号括起来的任意文本，比如<code>&#39;abc&#39;</code>和<code>&quot;abc&quot;</code>就是同一字符串。如果字符串中同时包含<code>&#39;</code>和<code>&quot;</code>的话，可以使用转义符<code>\</code>来转义：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'I\'m \"daxiang\"'</span></span><br></pre></td></tr></table></figure></p>
+<p>就是<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">I<span class="string">'m "daxiang"</span></span><br></pre></td></tr></table></figure></p>
+<p>转义符<code>\</code>还可以转义很多东西，比如<code>\n</code>就是换行，<code>\t</code>就是制表符，而<code>\\</code>表示的就是<code>\</code>。为了避免转义符带来的困扰，<code>python</code>还引入了<code>r&#39;&#39;</code>原始字符串的概念，<code>r&#39;&#39;</code>中间的字符串默认不转义。</p>
+<h4 id="布尔值"><a href="#布尔值" class="headerlink" title="布尔值"></a>布尔值</h4><p>布尔值就是<code>True</code>和<code>False</code>,拥有运算<code>and</code>,<code>or</code>,<code>not</code>。</p>
+<h4 id="空值"><a href="#空值" class="headerlink" title="空值"></a>空值</h4><p>空值在<code>python</code>中用<code>None</code>表示，<code>None</code>不等同于<code>0</code>，<code>0</code>在<code>python</code>是有实际意义的一个数字，而<code>None</code>是一个特殊的空值。</p>
+<h3 id="字符串和编码"><a href="#字符串和编码" class="headerlink" title="字符串和编码"></a>字符串和编码</h3><h4 id="字符编码"><a href="#字符编码" class="headerlink" title="字符编码"></a>字符编码</h4><p>说到字符编码，首先要介绍一下他的产生历史。一开始呢，只有<code>127</code>个字符被编码到了计算机里面，就是一些大小写字母和一些特俗符合，这个叫做<code>ASCII</code>码。这个对于外国人来说，已经够用了。但是如果我们想处理中文的话，显然这套编码是不够用的。所以中国人就制定了<code>GB2312</code>编码提供给自己使用。同样的，每种语言都给自己制定了一套编码。很快，编码世界就非常混乱，多语言的文本经常出现乱码问题。所以，经过讨论，制定出了一种适合所有语言的编码，叫做<code>Unicode</code>。这套编码把所有语言都包含进去了，所以也不存在乱码的问题。<br>但是，存在的问题也很明显。<code>ASCII</code>编码占用的是一个字节，而<code>Unicode</code>编码通常占用两个字节。。虽然乱码的问题解决了，但是存储和传输所消耗的资源却比之前多很多。对于之前适用<code>ASCII</code>编码的那些字符，套用<code>Unicode</code>编码就显得非常不合适。<br>本着节约的精神，”可变长编码”<code>utf-8</code>编码也就应运而生。<code>utf</code>把将<code>Unicode</code>编码的字符根据数字大小编码成1-6个字节。常见的英文字母被编码成1个字节，而中文一般被编码成3个字节，只有一些生僻的字符才会被编码成4-6个字节。同时，还可以将<code>ASCII</code>编码视为<code>utf-8</code>编码的一部分，这样也可以和之前使用<code>ASCII</code>编码的程序兼容，解决历史遗留问题。<br>然后，我们概括一下计算机中编码的工作方式：<br>在计算机内存里，统一使用<code>Unicode</code>编码，在需要保存和传输的时候，转换成<code>utf-8</code>编码。<br>比如说我们在编辑一个<code>txt</code>文件，我们先将从文件中读取的<code>utf-8</code>字符转换成<code>Unicode</code>字符存放在内存里。在编辑完以后，再转换成<code>utf-8</code>字符存储到<code>txt</code>文件。<br>再比如说我们在浏览一个网页，服务器先将动态生成的<code>Unicode</code>转换成<code>utf-8</code>字符，然后传输给我们。我们接收到<code>utf-8</code>字符再转换成<code>Unicode</code>字符展现出来。</p>
+<h4 id="python的字符串"><a href="#python的字符串" class="headerlink" title="python的字符串"></a>python的字符串</h4><p>字符串最大的特点,即<strong>不可变</strong>，不论使用什么函数，字符串的本身是<strong>不会变化</strong>的。<br>在<code>python3</code>中，已经适配了<code>Unicode</code>编码，所以说<code>python3</code>可以直接输出中文，而不会像<code>python2</code>那样乱码了。同时，<code>python3</code>提供了<code>ord()</code>来将字符转换成编码的整数形式，提供了<code>chr()</code>将整数形式的编码转换成字符。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>ord(<span class="string">'A'</span>)</span><br><span class="line"><span class="number">65</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>chr(<span class="number">66</span>)</span><br><span class="line"><span class="string">'B'</span></span><br></pre></td></tr></table></figure></p>
+<p>也可以用十六进制来表示整数:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'\u5f20\u5927\u8c61'</span></span><br><span class="line"><span class="string">'张大象'</span></span><br></pre></td></tr></table></figure></p>
+<p>这两张写法是完全等价的。<br>在<code>python3</code>中，字符串类型是<code>str</code>，在内存中以<code>Unicode</code>表示，一个字符对应几个字节。如果需要传输或者保存的话，就需要通过<code>encode()</code>方法转换成以字节为单位的字符串类型<code>bytes</code>。在<code>python</code>中对于<code>bytes</code>类型的数据，用带b前缀的单引号或者双引号表示。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">b'ABC'</span></span><br><span class="line"><span class="string">b'ABC'</span></span><br></pre></td></tr></table></figure></p>
+<p>这里的<code>b&#39;ABC&#39;</code>和<code>&#39;ABC&#39;</code>是不一样的，一个是<code>bytes</code>，一个是<code>str</code>。其中<code>b&#39;ABC&#39;</code>是以字节为单位的。<br>如果<code>b&#39;&#39;</code>中间的字符不是<code>ASCII</code>中的，则会报错：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">b'张大象'</span></span><br><span class="line">SyntaxError: bytes can only contain ASCII literal characters.</span><br></pre></td></tr></table></figure></p>
+<p>同时，对于无法用<code>ASCII</code>编码表示的字符，<code>python</code>会用<code>/x###</code>来表示：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'ABC'</span>.encode(<span class="string">'utf-8'</span>)</span><br><span class="line"><span class="string">b'ABC'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'张大象'</span>.encode(<span class="string">'utf-8'</span>)</span><br><span class="line"><span class="string">b'\xe5\xbc\xa0\xe5\xa4\xa7\xe8\xb1\xa1'</span></span><br></pre></td></tr></table></figure></p>
+<p>反过来，如果从磁盘中或者浏览器得到<code>bytes</code>的字节流，我们希望转换成<code>Unicode</code>的字符，可以使用<code>decode()</code>：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">b'ABC'</span>.decode(<span class="string">'utf-8'</span>)</span><br><span class="line"><span class="string">'ABC'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">b'\xe5\xbc\xa0\xe5\xa4\xa7\xe8\xb1\xa1'</span>.decode(<span class="string">'utf-8'</span>)</span><br><span class="line"><span class="string">'张大象'</span></span><br></pre></td></tr></table></figure></p>
+<p>可以使用<code>len()</code>来计算长度，<code>str</code>计算的是字符数，<code>bytes</code>计算的是字节数：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>len(<span class="string">'张大象'</span>)</span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>len(<span class="string">b'\xe5\xbc\xa0\xe5\xa4\xa7\xe8\xb1\xa1'</span>)</span><br><span class="line"><span class="number">9</span></span><br></pre></td></tr></table></figure></p>
+<p>由此可见，中文在<code>utf-8</code>中一般编码成3个字节。<br>记录一下字符串的常见操作：<br>1.去除空格:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>name=<span class="string">' zhangdaxiang '</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>name.strip() <span class="comment">#删除字符串两边的指定字符，括号的写入指定字符，默认为空格</span></span><br><span class="line"><span class="string">'zhangdaxiang'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>name.lstrip() <span class="comment">#删除字符串左边的指定字符，括号的写入指定字符，默认为空格</span></span><br><span class="line"><span class="string">'zhangdaxiang '</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>name.rstrip() <span class="comment">#删除字符串右边指定字符，默认为空格</span></span><br><span class="line"><span class="string">' zhangdaxiang'</span></span><br></pre></td></tr></table></figure></p>
+<p>2.连接字符串:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#万恶的加号</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>name=<span class="string">'zhangdaxiang '</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>profession=<span class="string">' student'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>str=name+<span class="string">'is a'</span>+profession</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>str</span><br><span class="line"><span class="string">'zhangdaxiangis astudent'</span></span><br><span class="line"><span class="comment">#使用一次加号会开辟一个name+profession大小的存储单元，如果使用N次加号，就会开辟N次，这是非常消耗资源的，也是"万恶"的来源。</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>num=<span class="string">'12345'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>str=<span class="string">'+'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>result=str.join(num)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>result</span><br><span class="line"><span class="string">'1+2+3+4+5'</span></span><br></pre></td></tr></table></figure></p>
+<p>3.查找字符串：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#str.index()和str.find()函数的区别在于，str.find()查找失败会返回-1，不影响程序运行，而str.index()会报错，所以我们一般使用str.find()!=-1或str.find()&gt;-1作为判断条件。</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>name=<span class="string">'zhangdaxiang'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>name.index(<span class="string">'a'</span>)</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>name.find(<span class="string">'a'</span>)</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>name.find(<span class="string">'j'</span>)</span><br><span class="line"><span class="number">-1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>name.index(<span class="string">'j'</span>)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;pyshell#31&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    name.index(<span class="string">'j'</span>)</span><br><span class="line">ValueError: substring <span class="keyword">not</span> found</span><br></pre></td></tr></table></figure></p>
+<p>4.是否包含指定字符串：<br>使用<code>in</code>和<code>not in</code>，返回的是<code>True</code>和<code>False</code>。<br>5.字符串中字母大小写转换<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>name=<span class="string">'zHangdaXiAng'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>name.lower() <span class="comment">#全部转换为小写</span></span><br><span class="line"><span class="string">'zhangdaxiang'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>name.upper() <span class="comment">#全部转换成大写</span></span><br><span class="line"><span class="string">'ZHANGDAXIANG'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>name.swapcase() <span class="comment">#大小写互换</span></span><br><span class="line"><span class="string">'ZhANGDAxIaNG'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>name.capitalize() <span class="comment">#首字母大写</span></span><br><span class="line"><span class="string">'Zhangdaxiang'</span></span><br></pre></td></tr></table></figure></p>
+<p>6.将字符串放入中心位置可指定长度以及位置两边字符：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>name=<span class="string">'zhangdaxiang'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>name.center(<span class="number">40</span>,<span class="string">'*'</span>)</span><br><span class="line"><span class="string">'**************zhangdaxiang**************'</span></span><br></pre></td></tr></table></figure></p>
+<p>7.字符串统计:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>name=<span class="string">'zhangdaxiang'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>name.count(<span class="string">'a'</span>)</span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure></p>
+<p>8.字符串的判断函数:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">S.startswith(prefix[,start[,end]]) <span class="comment">#是否以prefix开头 </span></span><br><span class="line">S.endswith(suffix[,start[,end]]) <span class="comment">#以suffix结尾 </span></span><br><span class="line">S.isalnum()    <span class="comment">#是否全是字母和数字，并至少有一个字符 </span></span><br><span class="line">S.isalpha()    <span class="comment">#是否全是字母，并至少有一个字符 </span></span><br><span class="line">S.isdigit()    <span class="comment">#是否全是数字，并至少有一个字符 </span></span><br><span class="line">S.isspace()    <span class="comment">#是否全是空白字符，并至少有一个字符 </span></span><br><span class="line">S.islower()    <span class="comment">#S中的字母是否全是小写 </span></span><br><span class="line">S.isupper()    <span class="comment">#S中的字母是否便是大写 </span></span><br><span class="line">S.istitle()    <span class="comment">#S是否是首字母大写的</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="列表和元组"><a href="#列表和元组" class="headerlink" title="列表和元组"></a>列表和元组</h3><h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><p>列表(List)是<code>python</code>中的一种有序集合。我们可以很方便地存储数据，并添加删除。<br>定义列表：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">names=[<span class="string">'zhangdaxiang'</span>,<span class="string">'张大象'</span>,<span class="string">'bangbangtang'</span>,<span class="string">'棒棒糖'</span>]</span><br></pre></td></tr></table></figure></p>
+<p>通过下标访问元素：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>names[<span class="number">2</span>]</span><br><span class="line"><span class="string">'bangbangtang'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names[<span class="number">-1</span>]</span><br><span class="line"><span class="string">'棒棒糖'</span></span><br></pre></td></tr></table></figure></p>
+<p>如果希望同时访问多个数据，可以使用切片：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>names[<span class="number">1</span>:<span class="number">3</span>]  <span class="comment">#取下标1至下标4之间的数字，包括1，不包括3</span></span><br><span class="line">[<span class="string">'张大象'</span>, <span class="string">'bangbangtang'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names[<span class="number">1</span>:<span class="number">-1</span>] <span class="comment">#取下标1至-1的值，不包括-1</span></span><br><span class="line">[<span class="string">'张大象'</span>, <span class="string">'bangbangtang'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names[<span class="number">0</span>:<span class="number">3</span>] </span><br><span class="line">[<span class="string">'zhangdaxiang'</span>, <span class="string">'张大象'</span>, <span class="string">'bangbangtang'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names[:<span class="number">3</span>] <span class="comment">#如果是从头开始取，0可以忽略，跟上句效果一样</span></span><br><span class="line">[<span class="string">'zhangdaxiang'</span>, <span class="string">'张大象'</span>, <span class="string">'bangbangtang'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names[<span class="number">2</span>:] <span class="comment">#如果想取最后一个，必须不能写-1，只能这么写</span></span><br><span class="line">[<span class="string">'bangbangtang'</span>, <span class="string">'棒棒糖'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names[<span class="number">2</span>:<span class="number">-1</span>] <span class="comment">#这样-1就不会被包含了</span></span><br><span class="line">[<span class="string">'bangbangtang'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names[<span class="number">0</span>::<span class="number">2</span>] <span class="comment">#后面的2是代表，每隔一个元素，就取一个</span></span><br><span class="line">[<span class="string">'zhangdaxiang'</span>, <span class="string">'bangbangtang'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names[::<span class="number">2</span>] <span class="comment">#和上句效果一样</span></span><br><span class="line">[<span class="string">'zhangdaxiang'</span>, <span class="string">'bangbangtang'</span>]</span><br></pre></td></tr></table></figure></p>
+<p>如果想在列表最后添加一个元素可以使用<code>append()</code>:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>names.append(<span class="string">'biaobiao'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names</span><br><span class="line">[<span class="string">'zhangdaxiang'</span>, <span class="string">'张大象'</span>, <span class="string">'bangbangtang'</span>, <span class="string">'棒棒糖'</span>, <span class="string">'biaobiao'</span>]</span><br></pre></td></tr></table></figure></p>
+<p>使用<code>insert()</code>可以在指定位置插入元素：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>names.insert(<span class="number">1</span>,<span class="string">'飙飙'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names</span><br><span class="line">[<span class="string">'zhangdaxiang'</span>, <span class="string">'飙飙'</span>, <span class="string">'张大象'</span>, <span class="string">'bangbangtang'</span>, <span class="string">'棒棒糖'</span>, <span class="string">'biaobiao'</span>]</span><br></pre></td></tr></table></figure></p>
+<p>要删除末尾元素可以使用pop(),删除指定位置元素使用pop(i):<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>names.pop()</span><br><span class="line"><span class="string">'biaobiao'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names</span><br><span class="line">[<span class="string">'zhangdaxiang'</span>, <span class="string">'飙飙'</span>, <span class="string">'张大象'</span>, <span class="string">'bangbangtang'</span>, <span class="string">'棒棒糖'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names.pop(<span class="number">1</span>)</span><br><span class="line"><span class="string">'飙飙'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names</span><br><span class="line">[<span class="string">'zhangdaxiang'</span>, <span class="string">'张大象'</span>, <span class="string">'bangbangtang'</span>, <span class="string">'棒棒糖'</span>]</span><br></pre></td></tr></table></figure></p>
+<p>这样又回到了初始状态。<br>也可以使用<code>del</code>和<code>remove()</code>来删除：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">del</span> names[<span class="number">2</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names</span><br><span class="line">[<span class="string">'zhangdaxiang'</span>, <span class="string">'张大象'</span>, <span class="string">'棒棒糖'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names.remove(<span class="string">'棒棒糖'</span>) <span class="comment">#删除指定元素</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names</span><br><span class="line">[<span class="string">'zhangdaxiang'</span>, <span class="string">'张大象'</span>]</span><br></pre></td></tr></table></figure></p>
+<p>也可以同时添加多个元素,使用<code>extend()</code>:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>names.extend([<span class="string">'bangbangtang'</span>,<span class="string">'棒棒糖'</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names</span><br><span class="line">[<span class="string">'zhangdaxiang'</span>, <span class="string">'张大象'</span>, <span class="string">'bangbangtang'</span>, <span class="string">'棒棒糖'</span>]</span><br></pre></td></tr></table></figure></p>
+<p>使用<code>index()</code>可以查看元素所在下标：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>names.index(<span class="string">'张大象'</span>)</span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<p>使用<code>count()</code>可以实现计数功能：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>names.append(<span class="string">'张大象'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names</span><br><span class="line">[<span class="string">'zhangdaxiang'</span>, <span class="string">'张大象'</span>, <span class="string">'bangbangtang'</span>, <span class="string">'棒棒糖'</span>, <span class="string">'张大象'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names.count(<span class="string">'张大象'</span>)</span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure></p>
+<p>翻转和排序：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>names=[<span class="string">'zhangdaxiang'</span>, <span class="string">'张大象'</span>, <span class="string">'bangbangtang'</span>, <span class="string">'棒棒糖'</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names.sort() <span class="comment">#排序</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;pyshell#37&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    names.sort()</span><br><span class="line">TypeError: unorderable types: int() &lt; str()  <span class="comment">#3.0里不同数据类型不能放在一起排序了</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names=[<span class="string">'zhangdaxiang'</span>, <span class="string">'张大象'</span>, <span class="string">'bangbangtang'</span>, <span class="string">'棒棒糖'</span>, <span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names.sort()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names</span><br><span class="line">[<span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>, <span class="string">'bangbangtang'</span>, <span class="string">'zhangdaxiang'</span>, <span class="string">'张大象'</span>, <span class="string">'棒棒糖'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names.reverse()<span class="comment">#翻转</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names</span><br><span class="line">[<span class="string">'棒棒糖'</span>, <span class="string">'张大象'</span>, <span class="string">'zhangdaxiang'</span>, <span class="string">'bangbangtang'</span>, <span class="string">'3'</span>, <span class="string">'2'</span>, <span class="string">'1'</span>]</span><br></pre></td></tr></table></figure></p>
+<h4 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h4><p>元组(tuple)和<code>list</code>是非常相似的，也是一个有序的集合。但是元组有一个特性，那就是不可更改。这样，<code>tuple</code>具有更高的安全性，所以我们如果在可以用<code>tuple</code>代替<code>list</code>的地方，就劲量使用<code>tuple</code>。<br>定义一个<code>tuple</code>:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>names = (<span class="string">'zhangdaxiang'</span>,<span class="string">'张大象'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names</span><br><span class="line">(<span class="string">'zhangdaxiang'</span>, <span class="string">'张大象'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>定义一个空的<code>tuple</code>:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>names=()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names</span><br><span class="line">()</span><br></pre></td></tr></table></figure></p>
+<p>定义一个单一元素的<code>tuple</code>:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>names=(<span class="string">'zhangdaxiang'</span>,)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names</span><br><span class="line">(<span class="string">'zhangdaxiang'</span>,)</span><br></pre></td></tr></table></figure></p>
+<p>如果使用<code>names=(&#39;zhangdaxiang&#39;)</code>,虽然不会报错，但是实际上<code>python</code>所做的操作是将<code>&#39;zhangdaxiang&#39;</code>这个字符串赋值给了<code>names</code>变量，并不是<code>tuple</code>。</p>
+<h3 id="字典和集合"><a href="#字典和集合" class="headerlink" title="字典和集合"></a>字典和集合</h3><h4 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h4><p><code>python</code>内置了字典(dict)，就是一种键值(key-value)对应的存储模式。这个和列表相比是<strong>无序</strong>的，但是和字典一样，非常便于查找，有很快的查找速度。<br>定义字典：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>names=&#123;<span class="string">'name'</span>:<span class="string">'zhangdaxiang'</span>,<span class="string">'age'</span>:<span class="string">'25'</span>,<span class="string">'city'</span>:<span class="string">'hangzhou'</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names</span><br><span class="line">&#123;<span class="string">'name'</span>: <span class="string">'zhangdaxiang'</span>, <span class="string">'city'</span>: <span class="string">'hangzhou'</span>, <span class="string">'age'</span>: <span class="string">'25'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中要注意的两点是：无序，<code>key</code>值是唯一的。<br>我们要额外增加一个元素的话很简单：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>names[<span class="string">'friend'</span>]=<span class="string">'bangbangtang'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names</span><br><span class="line">&#123;<span class="string">'name'</span>: <span class="string">'zhangdaxiang'</span>, <span class="string">'city'</span>: <span class="string">'hangzhou'</span>, <span class="string">'friend'</span>: <span class="string">'bangbangtang'</span>, <span class="string">'age'</span>: <span class="string">'25'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>修改元素：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>names[<span class="string">'friend'</span>] = <span class="string">'飙飙'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names</span><br><span class="line">&#123;<span class="string">'name'</span>: <span class="string">'zhangdaxiang'</span>, <span class="string">'city'</span>: <span class="string">'hangzhou'</span>, <span class="string">'friend'</span>: <span class="string">'飙飙'</span>, <span class="string">'age'</span>: <span class="string">'25'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>删除操作的话和<code>list</code>也非常类似：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>names.pop(<span class="string">'age'</span>)<span class="comment">#最常用的删除方式</span></span><br><span class="line"><span class="string">'25'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names</span><br><span class="line">&#123;<span class="string">'name'</span>: <span class="string">'zhangdaxiang'</span>, <span class="string">'city'</span>: <span class="string">'hangzhou'</span>, <span class="string">'friend'</span>: <span class="string">'飙飙'</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">del</span> names[<span class="string">'friend'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names</span><br><span class="line">&#123;<span class="string">'name'</span>: <span class="string">'zhangdaxiang'</span>, <span class="string">'city'</span>: <span class="string">'hangzhou'</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names.popitem()<span class="comment">#随机删除</span></span><br><span class="line">(<span class="string">'name'</span>, <span class="string">'zhangdaxiang'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names</span><br><span class="line">&#123;<span class="string">'city'</span>: <span class="string">'hangzhou&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>查找元素：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>names=&#123;<span class="string">'name'</span>: <span class="string">'zhangdaxiang'</span>, <span class="string">'city'</span>: <span class="string">'hangzhou'</span>, <span class="string">'friend'</span>: <span class="string">'飙飙'</span>, <span class="string">'age'</span>: <span class="string">'25'</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'name'</span> <span class="keyword">in</span> names <span class="comment">#标准用法</span></span><br><span class="line"><span class="keyword">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names.get(<span class="string">'city'</span>) <span class="comment">#获取</span></span><br><span class="line"><span class="string">'hangzhou'</span></span><br><span class="line"><span class="comment">#如果key不存在，可以返回None，或者自己指定的value</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>name.get(<span class="string">'age1'</span>,<span class="number">-1</span>)</span><br><span class="line"><span class="number">-1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names[<span class="string">'age'</span>] <span class="comment">#同上，但是如果key不存在会报错，如下</span></span><br><span class="line"><span class="string">'25'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>name[<span class="string">'age1'</span>] <span class="comment">#key不存在</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;pyshell#18&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    name[<span class="string">'age1'</span>]</span><br><span class="line">NameError: name <span class="string">'name'</span> <span class="keyword">is</span> <span class="keyword">not</span> defined</span><br></pre></td></tr></table></figure></p>
+<p>多级字典嵌套已经操作：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">av_catalog = &#123;</span><br><span class="line">    <span class="string">"欧美"</span>:&#123;</span><br><span class="line">        <span class="string">"www.youporn.com"</span>: [<span class="string">"很多免费的,世界最大的"</span>,<span class="string">"质量一般"</span>],</span><br><span class="line">        <span class="string">"www.pornhub.com"</span>: [<span class="string">"很多免费的,也很大"</span>,<span class="string">"质量比yourporn高点"</span>],</span><br><span class="line">        <span class="string">"letmedothistoyou.com"</span>: [<span class="string">"多是自拍,高质量图片很多"</span>,<span class="string">"资源不多,更新慢"</span>],</span><br><span class="line">        <span class="string">"x-art.com"</span>:[<span class="string">"质量很高,真的很高"</span>,<span class="string">"全部收费,屌比请绕过"</span>]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"日韩"</span>:&#123;</span><br><span class="line">        <span class="string">"tokyo-hot"</span>:[<span class="string">"质量怎样不清楚,个人已经不喜欢日韩范了"</span>,<span class="string">"听说是收费的"</span>]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"大陆"</span>:&#123;</span><br><span class="line">        <span class="string">"1024"</span>:[<span class="string">"全部免费,真好,好人一生平安"</span>,<span class="string">"服务器在国外,慢"</span>]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">av_catalog[<span class="string">"大陆"</span>][<span class="string">"1024"</span>][<span class="number">1</span>] += <span class="string">",可以用爬虫爬下来"</span></span><br><span class="line">print(av_catalog[<span class="string">"大陆"</span>][<span class="string">"1024"</span>])</span><br><span class="line"><span class="comment">#ouput </span></span><br><span class="line">[<span class="string">'全部免费,真好,好人一生平安'</span>, <span class="string">'服务器在国外,慢,可以用爬虫爬下来'</span>]</span><br></pre></td></tr></table></figure></p>
+<p>我们还需要了解的是<code>dict</code>的其他操作：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names=&#123;<span class="string">'name'</span>: <span class="string">'zhangdaxiang'</span>, <span class="string">'city'</span>: <span class="string">'hangzhou'</span>, <span class="string">'friend'</span>: <span class="string">'飙飙'</span>, <span class="string">'age'</span>: <span class="string">'25'</span>&#125;</span><br><span class="line"><span class="comment">#values</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names.values()</span><br><span class="line">dict_values([<span class="string">'zhangdaxiang'</span>, <span class="string">'hangzhou'</span>, <span class="string">'飙飙'</span>, <span class="string">'25'</span>])</span><br><span class="line"><span class="comment">#keys</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names.keys()</span><br><span class="line">dict_keys([<span class="string">'name'</span>, <span class="string">'city'</span>, <span class="string">'friend'</span>, <span class="string">'age'</span>])</span><br><span class="line"><span class="comment">#item</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names.items()</span><br><span class="line">dict_items([(<span class="string">'name'</span>, <span class="string">'zhangdaxiang'</span>), (<span class="string">'city'</span>, <span class="string">'hangzhou'</span>), (<span class="string">'friend'</span>, <span class="string">'飙飙'</span>), (<span class="string">'age'</span>, <span class="string">'25'</span>)])</span><br><span class="line"><span class="comment">#setdefault</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names.setdefault(<span class="string">'school'</span>,<span class="string">'JL'</span>)</span><br><span class="line"><span class="string">'JL'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names</span><br><span class="line">&#123;<span class="string">'name'</span>: <span class="string">'zhangdaxiang'</span>, <span class="string">'city'</span>: <span class="string">'hangzhou'</span>, <span class="string">'friend'</span>: <span class="string">'飙飙'</span>, <span class="string">'age'</span>: <span class="string">'25'</span>, <span class="string">'school'</span>: <span class="string">'JL'</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names.setdefault(<span class="string">'friend'</span>,<span class="string">'bangbangtang'</span>)</span><br><span class="line"><span class="string">'飙飙'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names</span><br><span class="line">&#123;<span class="string">'name'</span>: <span class="string">'zhangdaxiang'</span>, <span class="string">'city'</span>: <span class="string">'hangzhou'</span>, <span class="string">'friend'</span>: <span class="string">'飙飙'</span>, <span class="string">'age'</span>: <span class="string">'25'</span>, <span class="string">'school'</span>: <span class="string">'JL'</span>&#125;</span><br><span class="line"><span class="comment">#update</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names=&#123;<span class="string">'name'</span>: <span class="string">'zhangdaxiang'</span>, <span class="string">'city'</span>: <span class="string">'hangzhou'</span>, <span class="string">'friend'</span>: <span class="string">'飙飙'</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>updates=&#123;<span class="string">'name'</span>:<span class="string">'张大象'</span>,<span class="string">'age'</span>:<span class="string">'25'</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names.update(updates)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names</span><br><span class="line">&#123;<span class="string">'name'</span>: <span class="string">'张大象'</span>, <span class="string">'city'</span>: <span class="string">'hangzhou'</span>, <span class="string">'friend'</span>: <span class="string">'飙飙'</span>, <span class="string">'age'</span>: <span class="string">'25'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>了解这么多<code>dict</code>的基本操作方法，其实我们平时用到<code>dict</code>的时候，很多都是循环的，这是两种常用的循环方法：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#方法1</span></span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> names:</span><br><span class="line">	print(key,names[key])</span><br><span class="line"><span class="comment">#方法2</span></span><br><span class="line"><span class="keyword">for</span> key,value <span class="keyword">in</span> names.items():</span><br><span class="line">	print(key,values)</span><br></pre></td></tr></table></figure></p>
+<h4 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h4><p>集合(set)和<code>dict</code>非常相似，也是一个存储<code>key</code>的集合。但是<code>set</code>不存储<code>value</code>,同时，在<code>set</code>中，<code>key</code>值也是不可重复的。<br>定义<code>set</code>：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>names=set([<span class="string">'张大象'</span>,<span class="string">'飙飙'</span>,<span class="string">'棒棒糖'</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names</span><br><span class="line">&#123;<span class="string">'张大象'</span>, <span class="string">'飙飙'</span>, <span class="string">'棒棒糖'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>要注意的是，这里的三个元素和<code>dict</code>里是一样的，是没有顺序的。如果是重复元素的话，在<code>set</code>中会被直接过滤：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>names=set([<span class="string">'张大象'</span>,<span class="string">'飙飙'</span>,<span class="string">'棒棒糖'</span>,<span class="string">'张大象'</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names</span><br><span class="line">&#123;<span class="string">'张大象'</span>, <span class="string">'飙飙'</span>, <span class="string">'棒棒糖'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们可以使用<code>add(key)</code>来为<code>set</code>添加元素，但是如果添加的是重复项的话，虽然不会报错，但是也不会有任何效果：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>names.add(<span class="string">'biaobiao'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names</span><br><span class="line">&#123;<span class="string">'biaobiao'</span>, <span class="string">'张大象'</span>, <span class="string">'飙飙'</span>, <span class="string">'棒棒糖'</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names.add(<span class="string">'张大象'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names</span><br><span class="line">&#123;<span class="string">'biaobiao'</span>, <span class="string">'张大象'</span>, <span class="string">'飙飙'</span>, <span class="string">'棒棒糖'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后，使用<code>remove(key)</code>可以删除：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>names.remove(<span class="string">'biaobiao'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names</span><br><span class="line">&#123;<span class="string">'张大象'</span>, <span class="string">'飙飙'</span>, <span class="string">'棒棒糖'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>set</code>和<code>dict</code>是非常像的，他们的区别就是有没有放入<code>value</code>。同样值得注意的是，<code>set</code>和<code>dict</code>都不可以放入<strong>可变对象</strong>，因为不能判定两个<strong>可变对象</strong>是否相等，这样就不能保证内部的唯一性。</p>
+<h3 id="不可变对象"><a href="#不可变对象" class="headerlink" title="不可变对象"></a>不可变对象</h3><p>上面我们提到了<code>list</code>，<code>dict</code>之类的是可变对象，<code>str</code>字符串是不可变对象。<br>对于可变对象，比如说<code>list</code>进行操作，对象是会改变的：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>names=[<span class="string">'张大象'</span>,<span class="string">'飙飙'</span>,<span class="string">'棒棒糖'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names.sort()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>names</span><br><span class="line">[<span class="string">'张大象'</span>, <span class="string">'棒棒糖'</span>, <span class="string">'飙飙'</span>]</span><br></pre></td></tr></table></figure></p>
+<p>而对于不可变对象,<code>str</code>不论进行什么操作，对象都不会改变：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>name=<span class="string">'zhangdaxiang'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>name.replace(<span class="string">'a'</span>,<span class="string">'A'</span>)</span><br><span class="line"><span class="string">'zhAngdAxiAng'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>name</span><br><span class="line"><span class="string">'zhangdaxiang'</span></span><br></pre></td></tr></table></figure></p>
+<p>这样是不会改变的，想要改变的话，要把新生成的值赋给另外一个变量：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>cname=name.replace(<span class="string">'a'</span>,<span class="string">'A'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>name</span><br><span class="line"><span class="string">'zhangdaxiang'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>cname</span><br><span class="line"><span class="string">'zhAngdAxiAng'</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>张大象测试着玩的。</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="张大象 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" <i="" class="fa fa-tag"> python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/05/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/08/python之路(2)函数/" rel="prev" title="python之路(2):函数">
+                python之路(2):函数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="uyan_frame"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/touxiang.png" alt="张大象">
+            
+              <p class="site-author-name" itemprop="name">张大象</p>
+              <p class="site-description motion-element" itemprop="description">大象无形，大音希声。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型和变量"><span class="nav-number">1.</span> <span class="nav-text">数据类型和变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#整数"><span class="nav-number">1.1.</span> <span class="nav-text">整数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#浮点数"><span class="nav-number">1.2.</span> <span class="nav-text">浮点数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串"><span class="nav-number">1.3.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#布尔值"><span class="nav-number">1.4.</span> <span class="nav-text">布尔值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#空值"><span class="nav-number">1.5.</span> <span class="nav-text">空值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串和编码"><span class="nav-number">2.</span> <span class="nav-text">字符串和编码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#字符编码"><span class="nav-number">2.1.</span> <span class="nav-text">字符编码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python的字符串"><span class="nav-number">2.2.</span> <span class="nav-text">python的字符串</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列表和元组"><span class="nav-number">3.</span> <span class="nav-text">列表和元组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#列表"><span class="nav-number">3.1.</span> <span class="nav-text">列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元组"><span class="nav-number">3.2.</span> <span class="nav-text">元组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字典和集合"><span class="nav-number">4.</span> <span class="nav-text">字典和集合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#字典"><span class="nav-number">4.1.</span> <span class="nav-text">字典</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#集合"><span class="nav-number">4.2.</span> <span class="nav-text">集合</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不可变对象"><span class="nav-number">5.</span> <span class="nav-text">不可变对象</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+
+  </span>
+  <span class="author" itemprop="copyrightHolder">❤ Powered By-张大象</span>
+
+  
+</div>
+
+
+  <div class="powered-by"> 个人专属</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">博客 &mdash;  张大象</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2147235"></script>
+      <!-- UY END -->
+    
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>

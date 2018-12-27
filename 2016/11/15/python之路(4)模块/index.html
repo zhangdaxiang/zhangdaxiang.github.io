@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-da.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-da.png?v=5.1.3">
+
+
+
+
+
+
+  <meta name="keywords" content="python,module,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="大象无形" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="在python中，一个.py文件就是一个模块，我们可以将模块导入，直接使用里面已经写好的功能，所以python的拓展性是非常好的。但是如果我们的.py文件和python原有的模块名称重复了，就会出现问题。要解决这种情况，有一种方法是引入包。比如说我们的zhangdaxiang.py模块以及bangbang.py模块与系统原有模块重名了。我们可以选择一个顶层包名mypy,文件结构就成了这样：1234">
+<meta name="keywords" content="python,module">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python之路(4):模块">
+<meta property="og:url" content="http://yoursite.com/2016/11/15/python之路(4)模块/index.html">
+<meta property="og:site_name" content="大象无形">
+<meta property="og:description" content="在python中，一个.py文件就是一个模块，我们可以将模块导入，直接使用里面已经写好的功能，所以python的拓展性是非常好的。但是如果我们的.py文件和python原有的模块名称重复了，就会出现问题。要解决这种情况，有一种方法是引入包。比如说我们的zhangdaxiang.py模块以及bangbang.py模块与系统原有模块重名了。我们可以选择一个顶层包名mypy,文件结构就成了这样：1234">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/img/python之路(4)模块/time_img1.jpg">
+<meta property="og:image" content="http://yoursite.com/img/python之路(4)模块/time_img2.jpg">
+<meta property="og:updated_time" content="2018-12-27T03:08:01.988Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python之路(4):模块">
+<meta name="twitter:description" content="在python中，一个.py文件就是一个模块，我们可以将模块导入，直接使用里面已经写好的功能，所以python的拓展性是非常好的。但是如果我们的.py文件和python原有的模块名称重复了，就会出现问题。要解决这种情况，有一种方法是引入包。比如说我们的zhangdaxiang.py模块以及bangbang.py模块与系统原有模块重名了。我们可以选择一个顶层包名mypy,文件结构就成了这样：1234">
+<meta name="twitter:image" content="http://yoursite.com/img/python之路(4)模块/time_img1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"right","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"输入关键词","hits_empty":"无法与${query}匹配","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/11/15/python之路(4)模块/">
+
+
+
+
+
+  <title>python之路(4):模块 | 大象无形</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">大象无形</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            时间轴
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/15/python之路(4)模块/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="张大象">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/touxiang.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大象无形">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python之路(4):模块</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-15T10:37:48+08:00">
+                2016-11-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在<code>python</code>中，一个<code>.py</code>文件就是一个模块，我们可以将模块导入，直接使用里面已经写好的功能，所以<code>python</code>的拓展性是非常好的。但是如果我们的<code>.py</code>文件和<code>python</code>原有的模块名称重复了，就会出现问题。要解决这种情况，有一种方法是引入包。比如说我们的<code>zhangdaxiang.py</code>模块以及<code>bangbang.py</code>模块与系统原有模块重名了。我们可以选择一个顶层包名<code>mypy</code>,文件结构就成了这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mypy </span><br><span class="line">|____ __init__.py</span><br><span class="line">|____ zhangdaxiang.py</span><br><span class="line">|____ bangbang.py</span><br></pre></td></tr></table></figure></p>
+<p>这个时候,模块名就变成了<code>mypy.zhandaxiang</code>和<code>mypy.bangbang</code>，只要包名不一样，就没有问题。要注意的，每一个包目录下面都会有一个<code>__init__.py的文件</code>，这个文件是必须存在的，否则，<code>Python</code>就把这个目录当成普通目录，而不是一个包。<code>__init__.py</code>可以是空文件，也可以有Python代码，因为<code>__init__.py</code>本身就是一个模块，而它的模块名就是<code>mypy</code>。<br>而且，也可以使用多级目录，但是每个目录下面都要有<code>__init__.py</code>这个文件，比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mypy</span><br><span class="line">|____ mymode</span><br><span class="line">|	 |____ __init__.py</span><br><span class="line">|	 |____ zhangdaxiang.py</span><br><span class="line">|	 |____ bangbang.py</span><br><span class="line">|____ __init__.py</span><br><span class="line">|____ abc.py</span><br></pre></td></tr></table></figure></p>
+<p>这个时候，模块名称就是<code>mypy.mymode.zhangdaxiang</code>。<br>这种我们自己实现某些功能的模块就叫作第三方模块，于此对应的是<code>python</code>自带的功能模块叫作内置标准模块。<br>记录一些平时经常用到的内置标准模块和第三方模块：</p>
+<h3 id="内置标准模块"><a href="#内置标准模块" class="headerlink" title="内置标准模块"></a>内置标准模块</h3><h4 id="time模块"><a href="#time模块" class="headerlink" title="time模块"></a>time模块</h4><h5 id="时间表达形式"><a href="#时间表达形式" class="headerlink" title="时间表达形式"></a>时间表达形式</h5><p>在<code>Python</code>中，通常有这三种方式来表示时间：时间戳、格式化的时间字符串、元组(struct_time)即结构化时间。<br>1.时间戳(<code>timestamp</code>) ：通常来说，时间戳表示的是从<code>1970年1月1日00:00:00</code>开始按秒计算的偏移量。我们运行<code>type(time.time())</code>，返回的是<code>float</code>类型。<br>2.格式化的时间字符串(<code>Format String</code>)： ‘1994-11-05’<br>3.元组(<code>struct_time</code>) ：<code>struct_time</code>元组共有9个元素共九个元素:(年，月，日，时，分，秒，一年中第几周，一年中第几天等）<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="comment">#时间戳</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>time.time()	<span class="comment">#返回当前时间的时间戳</span></span><br><span class="line"><span class="number">1424710567.7350585</span></span><br><span class="line"><span class="comment">#时间字符串</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>time.strftime(<span class="string">"%Y-%m-%d %X"</span>)	<span class="comment">#%X为时分秒</span></span><br><span class="line"><span class="string">'2017-04-26 11:48:36'</span></span><br><span class="line"><span class="comment">#时间元组</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>time.localtime()	<span class="comment">#本地结构化时间</span></span><br><span class="line">time.struct_time(tm_year=<span class="number">2017</span>, tm_mon=<span class="number">4</span>, tm_mday=<span class="number">26</span>, tm_hour=<span class="number">11</span>, tm_min=<span class="number">50</span>, tm_sec=<span class="number">16</span>, tm_wday=<span class="number">3</span>, tm_yday=<span class="number">116</span>, tm_isdst=<span class="number">0</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>time.gmtime()		<span class="comment">#格里尼治结构化时间</span></span><br></pre></td></tr></table></figure></p>
+<p>以上的函数，不加默认值，均为当前时间。总之，时间戳是计算机能够识别的时间，时间字符串是人能够看懂的时间，元组则是用来操作时间的。</p>
+<h5 id="三种形式转换"><a href="#三种形式转换" class="headerlink" title="三种形式转换"></a>三种形式转换</h5><p>转换规则可以看下二图<br><img src="/img/python之路(4)模块/time_img1.jpg" alt="time_img1" width="400" high="400"><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#时间戳&lt;－－－－&gt;结构化时间：  localtime/gmtime   mktime</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>time.localtime(time.time())</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>time.gmtime(time.time())</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>time.mktime(time.localtime()) </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>time.mktime(time.gmtime())</span><br><span class="line"></span><br><span class="line"><span class="comment">#字符串时间&lt;－－－－&gt;结构化时间： strftime／strptime</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>time.strftime(<span class="string">"%Y-%m-%d %X"</span>, time.localtime())</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>time.strptime(<span class="string">"2017-04-26"</span>,<span class="string">"%Y-%m-%d"</span>)</span><br></pre></td></tr></table></figure></p>
+<p><img src="/img/python之路(4)模块/time_img2.jpg" alt="time_img2" width="400" high="400"><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>time.asctime(time.localtime(time.time()))</span><br><span class="line"><span class="string">'Wed Apr 26 17:26:00 2017'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>time.ctime(time.time())</span><br><span class="line"><span class="string">'Wed Apr 26 17:26:04 2017'</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#其他方法</span></span><br><span class="line">time.sleep()	<span class="comment">#单位秒</span></span><br></pre></td></tr></table></figure>
+<h4 id="random模块"><a href="#random模块" class="headerlink" title="random模块"></a>random模块</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> random</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.random()			<span class="comment">#大于0且小于1之间的小数</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.randint(<span class="number">1</span>,<span class="number">5</span>)		<span class="comment">#大于等于1且小于等于5之间的整数</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.randrange(<span class="number">1</span>,<span class="number">5</span>)		<span class="comment">#大于等于1且小于5之间的整数</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.choice([<span class="number">1</span>,<span class="string">'23'</span>,[<span class="number">4</span>,<span class="number">5</span>]])	<span class="comment">#1或者23或者[4,5]</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.sample([<span class="number">1</span>,<span class="string">'23'</span>,[<span class="number">4</span>,<span class="number">5</span>]],<span class="number">2</span>)	<span class="comment">#列表元素任意2个组合</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.uniform(<span class="number">1</span>,<span class="number">3</span>)		<span class="comment">#大于1小于3的小数</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 打乱次序</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>item=[<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.shuffle([<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>item</span><br><span class="line">[<span class="number">5</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">9</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.shuffle(item)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>item</span><br><span class="line">[<span class="number">5</span>, <span class="number">9</span>, <span class="number">7</span>, <span class="number">1</span>, <span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+<h4 id="os模块"><a href="#os模块" class="headerlink" title="os模块"></a>os模块</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> os</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.getcwd()	<span class="comment">#当前python脚本工作的目录路径</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.chdir()	<span class="comment">#改变工作目录</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.curdir()	<span class="comment">#返回当前目录，即('.')</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.pardir()	<span class="comment">#返回上一级目录,即('..')</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.makedirs(<span class="string">'dirname1/dirname2'</span>)	<span class="comment">#生成多层递归目录</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.removedirs(<span class="string">'dirname1'</span>)	<span class="comment">#若目录为空，则删除，并递归到上一级目录，如若也为空，则删除，依此类推</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.mkdir(<span class="string">'dirname'</span>)	<span class="comment">#生成单级目录</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.rmdir(<span class="string">'dirname'</span>)	<span class="comment">#删除单级目录</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.listdir()	<span class="comment">#列出当前目录下的文件和子目录，包括隐藏的文件</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.remove()	<span class="comment">#删除一个文件</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.rename(<span class="string">"oldname"</span>,<span class="string">"newname"</span>)	<span class="comment">#重命名文件/目录</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.sep	<span class="comment">#输出操作系统特定的路径分隔符，win下为"\\",Linux下为"/"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.linesep	<span class="comment">#输出当前平台使用的行终止符，win下为"\t\n",Linux下为"\n"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.pathsep		<span class="comment">#输出用于分割文件路径的字符串 win下为;,Linux下为:</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.name		<span class="comment">#输出字符串指示当前使用平台。win-&gt;'nt'; Linux-&gt;'posix'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.system(<span class="string">"bash command"</span>)		<span class="comment">#运行shell命令，直接显示</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.environ 	<span class="comment">#获取系统环境变量</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.stat(<span class="string">'path/filename'</span>)		<span class="comment">#获取文件/目录信息</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#os.stat('path/filename')的结构</span></span><br><span class="line"></span><br><span class="line">st_mode:		inode 保护模式</span><br><span class="line">st_ino: 		inode 节点号。</span><br><span class="line">st_dev: 		inode 驻留的设备。</span><br><span class="line">st_nlink: 		inode 的链接数。</span><br><span class="line">st_uid: 		所有者的用户ID。</span><br><span class="line">st_gid: 		所有者的组ID。</span><br><span class="line">st_size: 		普通文件以字节为单位的大小；包含等待某些特殊文件的数据。</span><br><span class="line">st_atime:		上次访问的时间。</span><br><span class="line">st_mtime:	最后一次修改的时间。</span><br><span class="line">st_ctime: 		由操作系统报告的<span class="string">"ctime"</span>。在某些系统上（如Unix）是最新的元数据更改的时间，在其它系统上（如Windows）是创建时间（详细信息参见平台的文档）。</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.abspath(path) 	<span class="comment">#返回path规范化的绝对路径</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.split(path) 	<span class="comment">#将path分割成目录和文件名二元组返回</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.dirname(path) 	<span class="comment">#返回path的目录。即os.path.split(path)的第一个元素</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.basename(path) 	<span class="comment">#返回path最后的文件名。若path以／或\结尾，那么就会返回空值。即os.path.split(path)的第二个元素</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.exists(path) 	<span class="comment">#如果path存在，返回True；如果path不存在，返回False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.isabs(path) 	<span class="comment">#如果path是绝对路径，返回True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.isfile(path) 	<span class="comment">#如果path是一个存在的文件，返回True。否则返回False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.isdir(path) 	<span class="comment">#如果path是一个存在的目录，则返回True。否则返回False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.join(path1[, path2[, ...]]) 	<span class="comment">#将多个路径组合后返回，第一个绝对路径之前的参数将被忽略</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.getatime(path) 	<span class="comment">#返回path所指向的文件或者目录的最后访问时间</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.getmtime(path) 	<span class="comment">#返回path所指向的文件或者目录的最后修改时间</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.getsize(path) 	<span class="comment">#返回path的大小</span></span><br></pre></td></tr></table></figure>
+<h4 id="sys模块"><a href="#sys模块" class="headerlink" title="sys模块"></a>sys模块</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> sys</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sys.argv 	<span class="comment">#命令行参数的list，python 123.py a b c，第一个元素是程序本身路径,即返回[abspath//123.py,a,b,c]</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sys.exit(n) 	<span class="comment">#退出程序，正常退出时exit(0)</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sys.maxint	<span class="comment">#最大的int值</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sys.platform	<span class="comment">#输出当前作系统平台名称</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sys.path	<span class="comment">#输出python的模块搜索路径，即环境变量</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sys.version	<span class="comment">#输出解释器版本</span></span><br></pre></td></tr></table></figure>
+<h4 id="logging模块"><a href="#logging模块" class="headerlink" title="logging模块"></a>logging模块</h4><p><code>logging</code>模块分5种高级级别，默认是<code>WARNING</code>。默认的日志格式为日志级别：<code>Logger</code>名称：用户输出消息。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> logging  </span><br><span class="line">logging.debug(<span class="string">'debug message'</span>)  </span><br><span class="line">logging.info(<span class="string">'info message'</span>)  </span><br><span class="line">logging.warning(<span class="string">'warning message'</span>)  </span><br><span class="line">logging.error(<span class="string">'error message'</span>)  </span><br><span class="line">logging.critical(<span class="string">'critical message'</span>)</span><br></pre></td></tr></table></figure>
+<p>配置日志格式，可以通过<code>logging.basicConfig</code>来配置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">logging.basicConfig(level=logging.DEBUG,  </span><br><span class="line">                    format=&apos;%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s&apos;,  </span><br><span class="line">                    datefmt=&apos;%a, %d %b %Y %H:%M:%S&apos;,  </span><br><span class="line">                    filename=&apos;/tmp/test.log&apos;,  </span><br><span class="line">                    filemode=&apos;w&apos;)  </span><br><span class="line">  </span><br><span class="line">logging.debug(&apos;debug message&apos;)  </span><br><span class="line">logging.info(&apos;info message&apos;)  </span><br><span class="line">logging.warning(&apos;warning message&apos;)  </span><br><span class="line">logging.error(&apos;error message&apos;)  </span><br><span class="line">logging.critical(&apos;critical message&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>配置参数<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">logging.basicConfig()函数中可通过具体参数来更改logging模块默认行为，可用参数有：</span><br><span class="line"></span><br><span class="line">filename：用指定的文件名创建FiledHandler，这样日志会被存储在指定的文件中。</span><br><span class="line">filemode：文件打开方式，在指定了filename时使用这个参数，默认值为“a”还可指定为“w”。</span><br><span class="line">format：指定handler使用的日志显示格式。</span><br><span class="line">datefmt：指定日期时间格式。</span><br><span class="line">level：设置rootlogger的日志级别</span><br><span class="line">stream：用指定的stream创建StreamHandler。可以指定输出到sys.stderr,sys.stdout或者文件(f=open(‘test.log’,’w’))，默认为sys.stderr。若同时列出了filename和stream两个参数，则stream参数会被忽略。</span><br><span class="line"></span><br><span class="line">format参数中可能用到的格式化串：</span><br><span class="line">%(name)s Logger的名字</span><br><span class="line">%(levelno)s 数字形式的日志级别</span><br><span class="line">%(levelname)s 文本形式的日志级别</span><br><span class="line">%(pathname)s 调用日志输出函数的模块的完整路径名，可能没有</span><br><span class="line">%(filename)s 调用日志输出函数的模块的文件名</span><br><span class="line">%(module)s 调用日志输出函数的模块名</span><br><span class="line">%(funcName)s 调用日志输出函数的函数名</span><br><span class="line">%(lineno)d 调用日志输出函数的语句所在的代码行</span><br><span class="line">%(created)f 当前时间，用UNIX标准的表示时间的浮 点数表示</span><br><span class="line">%(relativeCreated)d 输出日志信息时的，自Logger创建以 来的毫秒数</span><br><span class="line">%(asctime)s 字符串形式的当前时间。默认格式是 “<span class="number">2003</span><span class="number">-07</span><span class="number">-08</span> <span class="number">16</span>:<span class="number">49</span>:<span class="number">45</span>,<span class="number">896</span>”。逗号后面的是毫秒</span><br><span class="line">%(thread)d 线程ID。可能没有</span><br><span class="line">%(threadName)s 线程名。可能没有</span><br><span class="line">%(process)d 进程ID。可能没有</span><br><span class="line">%(message)s用户输出的消息</span><br></pre></td></tr></table></figure></p>
+<p>一般我们用的比较多的是创建<code>Logger</code>对象，然后来输出日志，如下<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">logger = logging.getLogger()</span><br><span class="line"></span><br><span class="line"><span class="comment">#设定日志级别</span></span><br><span class="line">logger.setLevel(<span class="string">'DEBUG'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#创建一个写入文件的Handler</span></span><br><span class="line">fileHandler = logging.FileHandler(<span class="string">'test.log'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#创建一个输出到屏幕的Handler</span></span><br><span class="line">streamHandler = logging.StreamHandler()</span><br><span class="line"></span><br><span class="line"><span class="comment">#格式化字符串</span></span><br><span class="line">formatter = logging.Formatter(<span class="string">'%(asctime)s - %(name)s - %(levelname)s - %(message)s'</span>)</span><br><span class="line"></span><br><span class="line">fileHandler.setFormatter(formatter)</span><br><span class="line">streamHandler.setFormatter(formatter)</span><br><span class="line"></span><br><span class="line"><span class="comment">#logger对象可以添加多个Handler</span></span><br><span class="line">logger.addHandler(fileHandler)</span><br><span class="line">logger.addHandler(streamHandler)</span><br><span class="line"></span><br><span class="line">logger.debug(<span class="string">'logger debug message'</span>)</span><br><span class="line">logger.info(<span class="string">'logger info message'</span>)</span><br><span class="line">logger.warning(<span class="string">'logger warning message'</span>)</span><br><span class="line">logger.error(<span class="string">'logger error message'</span>)</span><br><span class="line">logger.critical(<span class="string">'logger critical message'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>日志等级分别有以下几种：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CRITICAL : <span class="string">'CRITICAL'</span>,</span><br><span class="line">ERROR : <span class="string">'ERROR'</span>,</span><br><span class="line">WARNING : <span class="string">'WARNING'</span>,</span><br><span class="line">INFO : <span class="string">'INFO'</span>,</span><br><span class="line">DEBUG : <span class="string">'DEBUG'</span>,</span><br><span class="line">NOTSET : <span class="string">'NOTSET'</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="hashlib模块"><a href="#hashlib模块" class="headerlink" title="hashlib模块"></a>hashlib模块</h4><p><code>hashlib</code>是个专门提供hash算法的库，现在里面包括<code>md5</code>,<code>sha1</code>,<code>sha224</code>,<code>sha256</code>,<code>sha384</code>,<code>sha512</code>。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line">md51 = hashlib.md5()</span><br><span class="line">md51.update(<span class="string">'12345678'</span>.encode(<span class="string">'utf-8'</span>))</span><br><span class="line">print(md51.hexdigest())</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#如果数据量过大，可以分多次update()，结果一样</span></span><br><span class="line">md52 = hashlib.md5()</span><br><span class="line">md52.update(<span class="string">'1234'</span>.encode(<span class="string">'utf-8'</span>))</span><br><span class="line">md52.update(<span class="string">'5678'</span>.encode(<span class="string">'utf-8'</span>))</span><br><span class="line">print(md52.hexdigest())</span><br></pre></td></tr></table></figure></p>
+<p>由于常用口令的MD5值很容易被计算出来，所以，要确保存储的用户口令不是那些已经被计算出来的常用口令的MD5，这一方法通过对原始口令加一个复杂字符串来实现，俗称“加盐”：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hashlib.md5(<span class="string">"salt"</span>.encode(<span class="string">"utf8"</span>))</span><br></pre></td></tr></table></figure></p>
+<h3 id="第三方模块"><a href="#第三方模块" class="headerlink" title="第三方模块"></a>第三方模块</h3>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>张大象测试着玩的。</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="张大象 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" <i="" class="fa fa-tag"> python</a>
+          
+            <a href="/tags/module/" <i="" class="fa fa-tag"> module</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/13/python之路(3)高级特性/" rel="next" title="python之路(3):高级特性">
+                <i class="fa fa-chevron-left"></i> python之路(3):高级特性
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/15/python之路(5)面向对象/" rel="prev" title="python之路(5):面向对象">
+                python之路(5):面向对象 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="uyan_frame"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/touxiang.png" alt="张大象">
+            
+              <p class="site-author-name" itemprop="name">张大象</p>
+              <p class="site-description motion-element" itemprop="description">大象无形，大音希声。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#内置标准模块"><span class="nav-number">1.</span> <span class="nav-text">内置标准模块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#time模块"><span class="nav-number">1.1.</span> <span class="nav-text">time模块</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#时间表达形式"><span class="nav-number">1.1.1.</span> <span class="nav-text">时间表达形式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三种形式转换"><span class="nav-number">1.1.2.</span> <span class="nav-text">三种形式转换</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#random模块"><span class="nav-number">1.2.</span> <span class="nav-text">random模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#os模块"><span class="nav-number">1.3.</span> <span class="nav-text">os模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sys模块"><span class="nav-number">1.4.</span> <span class="nav-text">sys模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#logging模块"><span class="nav-number">1.5.</span> <span class="nav-text">logging模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hashlib模块"><span class="nav-number">1.6.</span> <span class="nav-text">hashlib模块</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三方模块"><span class="nav-number">2.</span> <span class="nav-text">第三方模块</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+
+  </span>
+  <span class="author" itemprop="copyrightHolder">❤ Powered By-张大象</span>
+
+  
+</div>
+
+
+  <div class="powered-by"> 个人专属</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">博客 &mdash;  张大象</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2147235"></script>
+      <!-- UY END -->
+    
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
