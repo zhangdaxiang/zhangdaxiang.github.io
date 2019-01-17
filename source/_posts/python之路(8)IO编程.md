@@ -1,6 +1,6 @@
 ---
 title: python之路(8):IO编程
-date: 2017-12-04 14:56:42
+date: 2016-12-04 14:56:42
 tags: python
 categories: python
 ---
