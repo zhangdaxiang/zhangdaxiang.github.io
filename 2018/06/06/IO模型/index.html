@@ -77,23 +77,23 @@
 
 
 
-<meta name="description" content="对于一个network IO (这里我们以read举例)，它会涉及到两个系统对象，一个是调用这个IO的process (or thread)，另一个就是系统内核(kernel)。当一个read操作发生时，它会经历两个阶段：  等待数据准备 (Waiting for the data to be ready)*将数据从内核拷贝到进程中 (Copying the data from the kerne">
+<meta name="description" content="对于一个network IO (这里我们以read举例)，它会涉及到两个系统对象，一个是调用这个IO的process (or thread)，另一个就是系统内核(kernel)。当一个read操作发生时，它会经历两个阶段：  等待数据准备 (Waiting for the data to be ready) 将数据从内核拷贝到进程中 (Copying the data from the kerne">
 <meta name="keywords" content="python,IO">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IO模型">
 <meta property="og:url" content="http://yoursite.com/2018/06/06/IO模型/index.html">
 <meta property="og:site_name" content="大象无形">
-<meta property="og:description" content="对于一个network IO (这里我们以read举例)，它会涉及到两个系统对象，一个是调用这个IO的process (or thread)，另一个就是系统内核(kernel)。当一个read操作发生时，它会经历两个阶段：  等待数据准备 (Waiting for the data to be ready)*将数据从内核拷贝到进程中 (Copying the data from the kerne">
+<meta property="og:description" content="对于一个network IO (这里我们以read举例)，它会涉及到两个系统对象，一个是调用这个IO的process (or thread)，另一个就是系统内核(kernel)。当一个read操作发生时，它会经历两个阶段：  等待数据准备 (Waiting for the data to be ready) 将数据从内核拷贝到进程中 (Copying the data from the kerne">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/img/IO模型/Blocking%20IO.jpg">
 <meta property="og:image" content="http://yoursite.com/img/IO模型/non-Blocking%20IO.jpg">
 <meta property="og:image" content="http://yoursite.com/img/IO模型/IO%20multiplexing.jpg">
 <meta property="og:image" content="http://yoursite.com/img/IO模型/Asynchronous%20IO.jpg">
 <meta property="og:image" content="http://yoursite.com/img/IO模型/compare%20IO%20models.jpg">
-<meta property="og:updated_time" content="2018-12-27T02:46:29.798Z">
+<meta property="og:updated_time" content="2018-12-27T07:50:45.595Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IO模型">
-<meta name="twitter:description" content="对于一个network IO (这里我们以read举例)，它会涉及到两个系统对象，一个是调用这个IO的process (or thread)，另一个就是系统内核(kernel)。当一个read操作发生时，它会经历两个阶段：  等待数据准备 (Waiting for the data to be ready)*将数据从内核拷贝到进程中 (Copying the data from the kerne">
+<meta name="twitter:description" content="对于一个network IO (这里我们以read举例)，它会涉及到两个系统对象，一个是调用这个IO的process (or thread)，另一个就是系统内核(kernel)。当一个read操作发生时，它会经历两个阶段：  等待数据准备 (Waiting for the data to be ready) 将数据从内核拷贝到进程中 (Copying the data from the kerne">
 <meta name="twitter:image" content="http://yoursite.com/img/IO模型/Blocking%20IO.jpg">
 
 
@@ -390,7 +390,8 @@
       
         <p>对于一个network IO (这里我们以read举例)，它会涉及到两个系统对象，一个是调用这个IO的process (or thread)，另一个就是系统内核(kernel)。当一个read操作发生时，它会经历两个阶段：</p>
 <ul>
-<li>等待数据准备 (Waiting for the data to be ready)<br>*将数据从内核拷贝到进程中 (Copying the data from the kernel to the process)</li>
+<li>等待数据准备 (Waiting for the data to be ready)</li>
+<li>将数据从内核拷贝到进程中 (Copying the data from the kernel to the process)</li>
 </ul>
 <p>以下几种IO Model的区别就是在两个阶段上各有不同的情况。</p>
 <h3 id="Blocking-IO-阻塞IO"><a href="#Blocking-IO-阻塞IO" class="headerlink" title="Blocking IO(阻塞IO)"></a>Blocking IO(阻塞IO)</h3><p>在linux中，默认情况下所有的socket都是blocking，一个典型的读操作流程大概是这样：<br><img src="/img/IO模型/Blocking IO.jpg" alt="Blocking_IO"><br>当用户进程调用了recvfrom这个系统调用，kernel就开始了IO的第一个阶段：准备数据。对于network io来说，很多时候数据在一开始还没有到达（比如，还没有收到一个完整的UDP包），这个时候kernel就要等待足够的数据到来。而在用户进程这边，整个进程会被阻塞。当kernel一直等到数据准备好了，它就会将数据从kernel中拷贝到用户内存，然后kernel返回结果，用户进程才解除block的状态，重新运行起来。<br>所以，blocking IO的特点就是在IO执行的两个阶段都被block了。</p>
@@ -550,7 +551,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -561,7 +562,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -572,7 +573,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -634,7 +635,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
 
   </span>
